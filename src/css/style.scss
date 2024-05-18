@@ -1,0 +1,46 @@
+$background-light: #f5f5f5;
+$background-dark: #333;
+
+$text-light: #333;
+$text-dark: #f5f5f5;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+#game {
+  width: 100vw;
+  height: 100vh;
+
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  background-color: $background-light;
+  color: $text-light;
+
+  .dark & {
+    background-color: $background-dark;
+    color: $text-dark;
+  }
+}
+
+.row {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+
+  .cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.background {
+  z-index: -1;
+}

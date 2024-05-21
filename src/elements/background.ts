@@ -6,7 +6,6 @@ export default class Background {
 
     private parent: HTMLElement;
 
-    private element: HTMLElement;
     private grid: Grid;
 
     constructor(width: number, height: number, size: number, parent: HTMLElement) {
@@ -15,15 +14,11 @@ export default class Background {
 
         this.parent = parent;
 
-        this.element = document.createElement('div');
-        this.element.classList.add('background');
-        this.parent.appendChild(this.element);
+        this.grid = new Grid({width: this.width, height: this.height}, size, 'background');
+        this.parent.appendChild(this.grid.getElement());
 
-        this.grid = new Grid({width: this.width, height: this.height}, size);
-        this.element.appendChild(this.grid.getElement());
-
-        this.fill({x: 0, y: 20}, {x: 84, y: 20}, '_')
-        this.fill({x: 85, y: 0}, {x: 85, y: this.height / size}, '|')
+        this.fill({x: 0, y: 15}, {x: 80, y: 15}, '_')
+        this.fill({x: 80, y: 0}, {x: 80, y: this.height}, '|')
     }
 
     public clear() {

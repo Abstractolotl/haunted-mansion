@@ -8,8 +8,9 @@ export class Grid {
     private dimension: Dimensions;
     private readonly size: number;
 
-    constructor(dimension: Dimensions, size: number) {
+    constructor(dimension: Dimensions, size: number, className: string = 'grid') {
         this.element = document.createElement('div');
+        this.element.classList.add(className);
 
         this.dimension = dimension;
         this.size = size;
@@ -22,7 +23,7 @@ export class Grid {
     }
 
     private createRows() {
-        for (let i = 0; i < this.dimension.height / this.size; i++) {
+        for (let i = 0; i < this.dimension.height; i++) {
             const row= new Row(this.dimension.width, this.size);
             this.element.appendChild(row.getElement());
             this.rows.push(row);
@@ -47,7 +48,7 @@ export class Row {
     constructor(width: number, size: number) {
         this.element = document.createElement('div');
         this.element.classList.add('row');
-        for (let i = 0; i < width / size; i++) {
+        for (let i = 0; i < width; i++) {
             const column = document.createElement('div');
             column.classList.add('cell');
 

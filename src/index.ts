@@ -1,6 +1,6 @@
 import "./css/style.scss";
-
 import Background from "./elements/background";
+import {Grid} from "@/elements/grid";
 
 const GRID_WIDTH =  1920; // 96 cells with 20px
 const GRID_HEIGHT = 1080; // 54 cells with 20px cell size
@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const GRID_ROWS = GRID_HEIGHT / GRID_SIZE;
     const GRID_COLUMNS = GRID_WIDTH / GRID_SIZE;
 
-    let background = new Background(GRID_COLUMNS, GRID_ROWS, SIZE, game);
+    let background = new Background(GRID_COLUMNS, GRID_ROWS, SIZE - 2, game);
+    let testGrid = new Grid({width: GRID_COLUMNS, height: GRID_ROWS}, SIZE - 2);
+
+    testGrid.drawFile('outside_background.txt', 0, 20);
+    game.append(testGrid.getElement());
 });
 
 document.addEventListener('resize', () => {

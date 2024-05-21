@@ -46,7 +46,11 @@ $text-dark: #f5f5f5;
   }
 }
 
+/**
+ * Layer system default z-index values
+ */
 .grid {
+  position: absolute;
   z-index: 1;
 }
 

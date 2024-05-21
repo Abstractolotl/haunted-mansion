@@ -21,10 +21,21 @@ module.exports = {
                     "sass-loader",
                 ],
             },
+            {
+                test: /\.(txt|json)$/i,
+                loader: 'raw-loader',
+            },
         ],
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            '@': path.resolve(__dirname, 'src'),
+        },
+        fallback: {
+            "fs": false,
+            "path": false,
+        }
     },
     devtool: 'inline-source-map',
     output: {

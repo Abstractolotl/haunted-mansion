@@ -1,4 +1,5 @@
-import {Dimensions} from "../types";
+import {Dimensions} from "@/types";
+import {FileParser} from "@/lib/file-parser";
 
 export class Grid {
 
@@ -36,6 +37,20 @@ export class Grid {
         if (row) {
             row.draw(element, x);
         }
+    }
+
+    public drawFile(file: string, x: number, y: number) {
+        import(`@/assets/${file}`).then((file) => {
+            let matrix = FileParser.parse(file.default)
+            matrix.reverse()
+
+            for (let i = 0; i < matrix.length; i++) {
+                for (let j = 0; j < matrix[i].length; j++) {
+                    console.log(matrix[i][j] + ' ' + (x + j) + ' ' + (y + i))
+                    this.draw(matrix[i][j], x + j, y + i)
+                }
+            }
+        });
     }
 
 }

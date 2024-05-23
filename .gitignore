@@ -174,9 +174,6 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist
-# Assets and config files should be synced
-!dist/config
-!dist/assets
 
 # Gatsby files
 .cache/
@@ -214,3 +211,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Custom settings
+
+!/dist/assets/
+!dist/assets/
+
+!/dist/config/
+!dist/config/

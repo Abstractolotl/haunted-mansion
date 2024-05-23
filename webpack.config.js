@@ -20,11 +20,7 @@ module.exports = {
                     // Compiles Sass to CSS
                     "sass-loader",
                 ],
-            },
-            {
-                test: /\.(txt|json)$/i,
-                loader: 'raw-loader',
-            },
+            }
         ],
     },
     resolve: {
@@ -32,14 +28,10 @@ module.exports = {
         alias: {
             '@': path.resolve(__dirname, 'src'),
         },
-        fallback: {
-            "fs": false,
-            "path": false,
-        }
     },
     devtool: 'inline-source-map',
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
-    },
+    }
 };

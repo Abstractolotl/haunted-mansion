@@ -1,4 +1,4 @@
-import {Dimensions} from "@/types";
+import {Dimensions, GridConfig} from "@/types";
 import {FileParser} from "@/lib/file-parser";
 
 export class Grid {
@@ -6,17 +6,26 @@ export class Grid {
     private element: HTMLElement;
     private rows: Row[] = [];
 
-    private dimension: Dimensions;
-    private readonly size: number;
+    private config: GridConfig;
 
-    constructor(dimension: Dimensions, size: number, className: string = 'grid') {
+    constructor(config: GridConfig, className: string = 'grid') {
         this.element = document.createElement('div');
         this.element.classList.add(className);
 
-        this.dimension = dimension;
-        this.size = size;
-
+        this.config = config;
         this.createRows();
+    }
+
+    public resize(size: number) {
+        this.rows.forEach(row => {
+            row.resize(size);
+        });
+    }
+
+    public clear() {
+        this.rows.forEach(row => {
+            row.clear();
+        });
     }
 
     public getElement() {
@@ -24,8 +33,8 @@ export class Grid {
     }
 
     private createRows() {
-        for (let i = 0; i < this.dimension.height; i++) {
-            const row= new Row(this.dimension.width, this.size);
+        for (let i = 0; i < this.config.height; i++) {
+            const row= new Row(this.config.width, this.config.size);
             this.element.appendChild(row.getElement());
             this.rows.push(row);
         }
@@ -40,13 +49,13 @@ export class Grid {
     }
 
     public drawFile(file: string, x: number, y: number) {
-        import(`@/assets/${file}`).then((file) => {
-            let matrix = FileParser.parse(file.default)
-            matrix.reverse()
+        fetch(`./assets/${file}`).then((response) => {
+            return response.text();
+        }).then((file) => {
+            let matrix = FileParser.parse(file)
 
             for (let i = 0; i < matrix.length; i++) {
                 for (let j = 0; j < matrix[i].length; j++) {
-                    console.log(matrix[i][j] + ' ' + (x + j) + ' ' + (y + i))
                     this.draw(matrix[i][j], x + j, y + i)
                 }
             }
@@ -73,6 +82,13 @@ export class Row {
             this.element.appendChild(column);
             this.columns.push(column);
         }
+    }
+
+    public resize(size: number) {
+        this.columns.forEach(column => {
+            column.style.width = `${size}px`;
+            column.style.height = `${size}px`;
+        });
     }
 
     public getElement() {

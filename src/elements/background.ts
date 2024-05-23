@@ -1,27 +1,26 @@
 import {Grid} from "./grid";
+import {GridConfig} from "@/types";
 
 export default class Background {
-    public width: number;
-    public height: number;
 
     private parent: HTMLElement;
 
+    private gridConfig: GridConfig;
     private grid: Grid;
 
-    constructor(width: number, height: number, size: number, parent: HTMLElement) {
-        this.width = width;
-        this.height = height;
-
+    constructor(gridConfig: GridConfig, sceneBorder: number[], parent: HTMLElement) {
+        this.gridConfig = gridConfig;
         this.parent = parent;
 
-        this.grid = new Grid({width: this.width, height: this.height}, size, 'background');
+        this.grid = new Grid(this.gridConfig, 'background');
         this.parent.appendChild(this.grid.getElement());
 
-        this.fill({x: 0, y: 15}, {x: 80, y: 15}, '_')
-        this.fill({x: 80, y: 0}, {x: 80, y: this.height}, '|')
+        this.fill({x: 0, y: sceneBorder[1]}, {x: sceneBorder[0], y: sceneBorder[1]}, '_')
+        this.fill({x: sceneBorder[0], y: 0}, {x: sceneBorder[0], y: this.gridConfig.height}, '|')
     }
 
-    public clear() {
+    public getGrid(){
+        return this.grid;
     }
 
     public fill(cordStart: {x: number, y: number}, cordEnd: {x: number, y: number}, symbol: string = '-') {

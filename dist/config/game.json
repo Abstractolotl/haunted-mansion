@@ -1,0 +1,12 @@
+{
+  "entryRoomId": "room1",
+  "startingItems": [],
+  "interface": {
+    "scene": [74, 16],
+    "actionLog": 32,
+    "inventory": {
+      "rows": 1,
+      "slotSize": [5, 3]
+    }
+  }
+}

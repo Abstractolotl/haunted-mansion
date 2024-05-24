@@ -23,7 +23,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     SCALE.addGrid(testGrid);
     SCALE.addGrid(background.getGrid());
 
-    testGrid.drawFile('outside_background.txt', 10, 25);
-    testGrid.drawFile('objects/small_window_broken.txt', 42, 31);
+    // Logic to draw the game border should be in the layer handling the border
+    let padding = CONFIG.getPadding();
+    let gameSizeX = CONFIG.getSceneBorder()[0] + (2 * padding);
+    let gameSizeY = CONFIG.getSceneBorder()[1] + (2 * padding);
+    let inventoryHeight = CONFIG.getInventorySize().rows * (CONFIG.getInventorySize().slotSize[1] + padding) + (2 * padding);
+    let actionLogWidth = CONFIG.getActionLogSize() + (2 * padding);
+    
+    // starting coordinates for the game
+    let gamePosX = 1 + padding;
+    let gamePosY = inventoryHeight + 2 + padding;
+
+    background.drawFile('outside_background.txt', gamePosX, gamePosY);
+    testGrid.drawFile('objects/small_window_broken.txt', gamePosX + 32, gamePosY + 6);
+    //background.drawBorder(gameSizeX, gameSizeY, inventoryHeight, actionLogWidth)
     game.append(testGrid.getElement());
 });

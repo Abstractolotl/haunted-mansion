@@ -41,12 +41,50 @@ export default class Background {
         this.draw('.', this.gridConfig.width - 1, this.gridConfig.height - 1);
     }
 
+    // TODO: where should the border actually be drawn? What layer should it be on?
+    public drawBorder(sizeX: number, sizeY: number, inventoryheight: number, actionLogWidth: number) {
+        // draw horizontal lines
+        for (let x = 0; x < sizeX + actionLogWidth + 1; x++) {
+            this.draw('-', x, 0);
+            this.draw('-', x, inventoryheight + sizeY + 2);
+        }
+        for (let x = 1; x < sizeX + 1; x++) {
+            this.draw('-', x, inventoryheight + 1);
+        }
+
+        // draw vertical lines
+        for (let y = 1; y < sizeY + inventoryheight + 2; y++) {
+            this.draw('|', 0, y);
+            this.draw('|', sizeX, y);
+            this.draw('|', sizeX + actionLogWidth + 1, y);
+        }
+        
+        // draw corners:
+        // bottom row
+        this.draw('+', 0, 0);
+        this.draw('+', sizeX, 0);
+        this.draw('+', sizeX + actionLogWidth + 1, 0);
+
+        // middle row
+        this.draw('+', 0, inventoryheight + 1);
+        this.draw('+', sizeX, inventoryheight + 1);
+
+        // top row
+        this.draw('+', 0, sizeY + inventoryheight + 2);
+        this.draw('+', sizeX, sizeY + inventoryheight + 2);
+        this.draw('+', sizeX + actionLogWidth + 1, sizeY + inventoryheight + 2);
+    }
+
     public getGrid(){
         return this.grid;
     }
 
     public draw(element: string, x: number, y: number) {
         this.grid.draw(element, x, y);
+    }
+
+    public drawFile(file: string, x: number, y: number) {
+        this.grid.drawFile(file, x, y);
     }
 
     public fill(cordStart: {x: number, y: number}, cordEnd: {x: number, y: number}, symbol: string = '-') {

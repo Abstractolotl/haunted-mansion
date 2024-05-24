@@ -14,4 +14,8 @@ export class Config {
         return this.gameConfig?.interface.scene!;
     }
 
+    getInventorySize() {
+        return this.gameConfig?.interface.inventory!;
+    }
+
 }

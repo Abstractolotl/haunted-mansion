@@ -76,7 +76,7 @@ export class Row {
             const column = document.createElement('div');
             column.classList.add('cell');
 
-            column.style.width = `${size}px`;
+            column.style.width = `${size/2}px`;
             column.style.height = `${size}px`;
 
             this.element.appendChild(column);

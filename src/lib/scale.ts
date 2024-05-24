@@ -3,7 +3,7 @@ import {Grid} from "@/elements/grid";
 const GRID_WIDTH =  1920; // 96 cells with 20px
 const GRID_HEIGHT = 1080; // 54 cells with 20px cell size
 const GRID_SIZE = 20;
-const GRID_PADDING = -2;
+const GRID_PADDING = 0;
 
 export class Scale {
 
@@ -51,9 +51,9 @@ export class Scale {
      */
     public getGridConfig(){
         return {
-            width: this.columns,
+            width: this.columns * 2,
             height: this.rows,
-            size: this.size + GRID_PADDING
+            size: this.size
         }
     }
 

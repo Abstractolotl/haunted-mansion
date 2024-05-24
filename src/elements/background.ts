@@ -26,7 +26,7 @@ export default class Background {
         this.fill({x: this.gridConfig.width - 1, y: 0}, {x: this.gridConfig.width - 1 , y: this.gridConfig.height}, '|')
 
         this.fill({x: 0, y: 0}, {x: this.gridConfig.width - 1, y: 0}, '_')
-        this.fill({x: 0, y: this.gridConfig.height - 1}, {x: this.gridConfig.width - 1, y: this.gridConfig.height - 1}, '-')
+        this.fill({x: 0, y: this.gridConfig.height - 1}, {x: this.gridConfig.width - 1, y: this.gridConfig.height - 1}, '_')
 
         this.draw('+', 0, sceneBorder[1]);
         this.draw('+', sceneBorder[0], sceneBorder[1]);

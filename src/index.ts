@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     SCALE.addGrid(testGrid);
     SCALE.addGrid(background.getGrid());
 
-    testGrid.drawFile('outside_background.txt', 0, 20);
+    testGrid.drawFile('outside_background.txt', 10, 25);
+    testGrid.drawFile('objects/small_window_broken.txt', 42, 31);
     game.append(testGrid.getElement());
 });

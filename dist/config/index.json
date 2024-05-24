@@ -61,11 +61,11 @@
         },
         {
             "name": "object_rock",
-            "path": "object/rock.txt"
+            "path": "objects/rock.txt"
         },
         {
             "name": "object_beer",
-            "path": "object/beer.txt"
+            "path": "objects/beer.txt"
         },
         {
             "name": "note",

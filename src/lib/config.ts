@@ -18,4 +18,15 @@ export class Config {
         return this.gameConfig?.interface.inventory!;
     }
 
+    getActionLogSize() {
+        return this.gameConfig?.interface.actionLog!;
+    }
+
+    getPadding() {
+        return this.gameConfig?.interface.padding || 0;
+    }
+
+    getStartingItems() {
+        return this.gameConfig?.startingItems || [];
+    }
 }

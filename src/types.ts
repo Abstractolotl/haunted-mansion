@@ -11,13 +11,16 @@ export type GridConfig = {
 
 export type GameConfig = {
     entryRoomId: string;
-    startingItems: string[];
-    interface: {
-        scene: number[];
-        actionLog: number[];
-        inventory: {
-            rows: number;
-            slotSize: number[];
-        }
-    }
+    startingItems?: string[];
+    interface: InterfaceConfig;
+}
+
+export type InterfaceConfig = {
+    scene: number[];
+    actionLog: number;
+    inventory: {
+        rows: number;
+        slotSize: number[];
+    },
+    padding?: number;
 }

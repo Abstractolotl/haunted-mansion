@@ -3,6 +3,7 @@ import Background from "./elements/background";
 import {Grid} from "@/elements/grid";
 import {Config} from "@/lib/config";
 import {Scale} from "@/lib/scale";
+import { Game } from "./game";
 
 const CONFIG = new Config();
 const SCALE = new Scale();
@@ -38,4 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     testGrid.drawFile('objects/small_window_broken.txt', gamePosX + 32, gamePosY + 6);
     //background.drawBorder(gameSizeX, gameSizeY, inventoryHeight, actionLogWidth)
     game.append(testGrid.getElement());
+
+
+    let gameObject = new Game('./config/game.json');
 });

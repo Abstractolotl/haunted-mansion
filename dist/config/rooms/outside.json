@@ -1,0 +1,106 @@
+{
+    "name": "outside",
+    "displayName": "Vorgarten",
+    "persistence": true,
+    "background": "outside_background",
+    "objects": [
+        {   "name": "outside_window_broken",
+            "posX": 32,
+            "posY": 6,
+            "texture": "small_window_broken",
+            "hidden": true
+        },
+        {   "name": "outside_window",
+            "posX": 32,
+            "posY": 6,
+            "texture": "small_window",
+            "interactions": [
+                {
+                    "conditions": [
+                        {
+                            "type": "selected_item",
+                            "options": {
+                                "itemName": "rock"
+                            }
+                        }
+                    ],
+                    "actions": [
+                        {
+                            "type": "hideObject",
+                            "options": {
+                                "id": "entrance_window"
+                            }
+                        },
+                        {
+                            "type": "hideObject",
+                            "options": {
+                                "id": "outside_window"
+                            }
+                        },
+                        {
+                            "type": "revealObject",
+                            "options": {
+                                "id": "entrance_window_broken"
+                            }
+                        },
+                        {
+                            "type": "revealObject",
+                            "options": {
+                                "id": "outside_window_broken"
+                            }
+                        },
+                        {
+                            "type": "playSound",
+                            "options": {
+                                "id": "glass_shatter"
+                            }
+                        },
+                        {
+                            "type": "printActionLog",
+                            "options": {
+                                "text": "Du nimmst den Stein und zerstörst das Fenster."
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {   "name": "outside_note",
+            "posX": 57,
+            "posY": 0,
+            "texture": "note",
+            "interactions": [
+                {
+                    "conditions": [],
+                    "actions": [
+                        {
+                            "type": "hideObject",
+                            "options": {
+                                "id": "outside_note"
+                            }
+                        },
+                        {
+                            "type": "grantNote",
+                            "options": {
+                                "noteName": "first_note"
+                            }
+                        },
+                        {
+                            "type": "showNote",
+                            "options": {
+                                "noteName": "first_note"
+                            }
+                        },
+                        {
+                            "type": "printActionLog",
+                            "options": {
+                                "text": "Du findest eine Notiz."
+                            }
+                        }
+                    ]
+                }
+            ]
+            
+        }
+    ]
+}

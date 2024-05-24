@@ -1,0 +1,75 @@
+{
+    "rooms": [
+        {
+            "name": "entrance",
+            "path": "rooms/entrance.json"
+        },
+        {
+            "name": "outside",
+            "path": "rooms/outside.json"
+        }
+    ],
+    "items": [
+        {
+            "name": "beer",
+            "path": "items/beer.json"
+        },
+        {
+            "name": "rock",
+            "path": "items/rock.json"
+        }
+    ],
+    "notes": [
+        {
+            "name": "first_note",
+            "path": "notes/first_note.json"
+
+        }
+    ],
+    "textures": [
+        {
+            "name": "entrance_background",
+            "path": "entrance_background.txt"
+        },
+        {
+            "name": "outside_background",
+            "path": "outside_background.txt"
+        },
+        {
+            "name": "entrance_door",
+            "path": "objects/entrance_door.txt"
+        },
+        {
+            "name": "window",
+            "path": "objects/window.txt"
+        },
+        {
+            "name": "window_broken",
+            "path": "objects/window_broken.txt"
+        },
+        {
+            "name": "small_window_broken",
+            "path": "objects/small_window_broken.txt"
+        },
+        {
+            "name": "item_rock",
+            "path": "items/rock.txt"
+        },
+        {
+            "name": "item_beer",
+            "path": "items/beer.txt"
+        },
+        {
+            "name": "object_rock",
+            "path": "object/rock.txt"
+        },
+        {
+            "name": "object_beer",
+            "path": "object/beer.txt"
+        },
+        {
+            "name": "note",
+            "path": "objects/note.txt"
+        }
+    ]
+}

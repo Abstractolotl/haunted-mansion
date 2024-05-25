@@ -12,14 +12,13 @@ export class Texture {
         this.loadTexture();
     }
     
-    // load with callback
     async loadTexture(): Promise<void> {
         console.log(`🖼️ Loading texture: ${this.name}`);
         
         let path = "assets/" + this.path;
         let response = await fetch(path);
         if (!response.ok) {
-            throw new Error(`❌ Failed to load texture: ${response.statusText} from ${path}`);
+            throw new Error(`❌ Failed to load texture from ${path}: ${response.statusText}`);
         }
         this.content = await response.text();
         // console.log(`✔️🖼️ Texture loaded: ${this.name}\n${this.content}`);

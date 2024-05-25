@@ -43,48 +43,11 @@ export type Entry = {
 }
 
 
-// rooms
-export type Room = {
-    name: string;
-    displayName: string;
-    persistence: boolean;
-    background: string;
-    objects: GameObject[];
-}
-
-
-// objects
-export type GameObject = {
-    name: string;
-    posX: number;
-    posY: number;
-    texture: string;
-    hidden?: boolean;
-    interactions?: Interaction[];
-}
-
-
-// items
-export type Item = {
-    name: string;
-    displayName: string;
-    texture: string;
-    interactions?: Interaction[];
-}
-
-
 // notes
 export type Note = {
     name: string;
     displayName: string;
     text: string;
-}
-
-
-// interactions
-export type Interaction = {
-    conditions: Condition[];
-    actions: Action[];
 }
 
 export type Action = {

@@ -1,7 +1,8 @@
 import { Item } from "./Item";
+import { Note } from "./Note";
 import { Room } from "./Room";
 import { Texture } from "./Texture";
-import { AssetIndex, GameConfig, Note } from "./types";
+import { AssetIndex, GameConfig } from "./types";
 
 export class Game {
     private index?: AssetIndex;
@@ -33,6 +34,7 @@ export class Game {
         this.loadTextures();
         this.loadRooms();
         this.loadItems();
+        this.loadNotes();
         
         // TODO: Load items and notes
 
@@ -84,6 +86,12 @@ export class Game {
         });
     }
 
+    private loadNotes() {
+        this.index!.notes!.forEach((entry) => {
+            this.notes.push(new Note(entry.name, entry.path));
+        });
+    }
+
     /**
      * Wait for all assets to load
      * @returns A promise that resolves when all assets have loaded
@@ -92,8 +100,10 @@ export class Game {
         while (true) {
             const allTexturesLoaded = this.textures.every(texture => texture.hasLoaded());
             const allRoomsLoaded = this.rooms.every(room => room.hasLoaded());
+            const allItemsLoaded = this.items.every(item => item.hasLoaded());
+            const allNotesLoaded = this.notes.every(note => note.hasLoaded());
 
-            if (allTexturesLoaded && allRoomsLoaded) {
+            if (allTexturesLoaded && allRoomsLoaded && allItemsLoaded && allNotesLoaded) {
                 return;
             }
     

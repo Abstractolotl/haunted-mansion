@@ -1,7 +1,5 @@
 import { Interaction, InteractionBlueprint } from "./Interaction";
-import { GameObject, GameObjectBlueprint } from "./Object";
-import { createAction } from "./actions";
-import { createCondition } from "./conditions";
+import { GameObject, GameObjectBlueprint } from "./GameObject";
 
 
 export type RoomBlueprint = {
@@ -31,6 +29,11 @@ export class Room {
         this.loadRoom();
     }
     
+    /**
+     * Load the room from the server
+     * @returns A promise that resolves when the room has been loaded
+     * @throws An error if the room could not be loaded
+     */
     async loadRoom(): Promise<void> {
         console.log(`🚪 Loading room: ${this.name}`);
         

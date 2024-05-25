@@ -47,6 +47,14 @@ export class Item {
     }
 
     /**
+     * Check if the Item has loaded
+     * @returns True if the Item has loaded
+     */
+    public hasLoaded(): boolean {
+        return this.loaded;
+    }
+
+    /**
      * Get the interactions of the Item
      * @returns The interactions of the Item
      */

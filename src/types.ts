@@ -42,14 +42,6 @@ export type Entry = {
     path: string;
 }
 
-
-// notes
-export type Note = {
-    name: string;
-    displayName: string;
-    text: string;
-}
-
 export type Action = {
     type: string;
     options?: any;

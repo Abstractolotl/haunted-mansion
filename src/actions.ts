@@ -1,7 +1,34 @@
 import { Action } from "./types";
 
-// TODO: Implement logic for each action
-// TODO: Implement rest of the actions
+
+//
+//  ROOMS
+//  TODO: Implement the rest of the room actions
+//
+
+class GoToRoomAction implements Action {
+    type: "goToRoom" = "goToRoom";
+    options: {
+        roomName: string;
+        suppressMessage?: boolean; // TODO: Send action log message
+    };
+
+    constructor(options: { roomName: string, suppressMessage?: boolean }) {
+        this.options = options;
+    }
+
+    trigger(): void {
+        console.log(`Going to room: ${this.options.roomName}`); // TODO: Implement the logic to go to the room
+    }
+}
+
+// class ResetRoomAction - evaluate if needed
+
+
+//
+//  OBJECTS
+//  TODO: Implement the rest of the object actions
+//
 
 class HideObjectAction implements Action {
     type: "hideObject" = "hideObject";
@@ -14,7 +41,7 @@ class HideObjectAction implements Action {
     }
 
     trigger(): void {
-        console.log(`Hiding object with ID: ${this.options.id}`);
+        console.log(`Hiding object with ID: ${this.options.id}`); // TODO: Implement the logic to hide the object
     }
 }
 
@@ -29,54 +56,18 @@ class RevealObjectAction implements Action {
     }
 
     trigger(): void {
-        console.log(`Revealing object with ID: ${this.options.id}`);
+        console.log(`Revealing object with ID: ${this.options.id}`); // TODO: Implement the logic to reveal the object
     }
 }
 
-class PrintActionLogAction implements Action {
-    type: "printActionLog" = "printActionLog";
-    options: {
-        text: string;
-    };
+// class MoveObjectAction
+// class ShiftObjectAction
 
-    constructor(options: { text: string }) {
-        this.options = options;
-    }
 
-    trigger(): void {
-        console.log(`Log: ${this.options.text}`);
-    }
-}
-
-class PlaySoundAction implements Action {
-    type: "playSound" = "playSound";
-    options: {
-        id: string;
-    };
-
-    constructor(options: { id: string }) {
-        this.options = options;
-    }
-
-    trigger(): void {
-        console.log(`Playing sound with ID: ${this.options.id}`);
-    }
-}
-
-class GoToRoomAction implements Action {
-    type: "goToRoom" = "goToRoom";
-    options: {
-        roomName: string;
-    };
-
-    constructor(options: { roomName: string }) {
-        this.options = options;
-    }
-
-    trigger(): void {
-        console.log(`Going to room: ${this.options.roomName}`);
-    }
-}
+//
+//  ITEMS
+//  TODO: Implement the rest of the item actions
+//
 
 class GiveItemAction implements Action {
     type: "giveItem" = "giveItem";
@@ -89,9 +80,16 @@ class GiveItemAction implements Action {
     }
 
     trigger(): void {
-        console.log(`Giving item with ID: ${this.options.id}`);
+        console.log(`Giving item with ID: ${this.options.id}`); // TODO: Implement the logic to give the item
     }
 }
+
+// class RemoveItemAction
+
+
+//
+//  NOTES
+//
 
 class GrantNoteAction implements Action {
     type: "grantNote" = "grantNote";
@@ -104,7 +102,7 @@ class GrantNoteAction implements Action {
     }
 
     trigger(): void {
-        console.log(`Granting note: ${this.options.noteName}`);
+        console.log(`Granting note: ${this.options.noteName}`); // TODO: Implement the logic to grant the note
     }
 }
 
@@ -119,9 +117,63 @@ class ShowNoteAction implements Action {
     }
 
     trigger(): void {
-        console.log(`Showing note: ${this.options.noteName}`);
+        console.log(`Showing note: ${this.options.noteName}`); // TODO: Implement the logic to show the note
     }
 }
+
+
+//
+//  VARIABLES
+//  TODO: Implement the rest of the variable actions
+//
+
+// class SetVariableAction
+// class IncrementVariableAction
+// class DecrementVariableAction
+
+
+//
+//  SOUNDS
+//
+
+class PlaySoundAction implements Action {
+    type: "playSound" = "playSound";
+    options: {
+        id: string;
+    };
+
+    constructor(options: { id: string }) {
+        this.options = options;
+    }
+
+    trigger(): void {
+        console.log(`Playing sound with ID: ${this.options.id}`); // TODO: Implement the logic to play the sound
+    }
+}
+
+
+//
+//  MISC
+//  TODO: Implement the rest of the misc actions
+//
+
+class PrintActionLogAction implements Action {
+    type: "printActionLog" = "printActionLog";
+    options: {
+        text: string;
+    };
+
+    constructor(options: { text: string }) {
+        this.options = options;
+    }
+
+    trigger(): void {
+        console.log(`Log: ${this.options.text}`); // TODO: Implement the logic to print the action log
+    }
+}
+
+// class callActionAction
+
 
 /**
  * Create an action from an action blueprint

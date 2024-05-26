@@ -6,11 +6,11 @@ export type NoteBlueprint = {
 
 // follows the same pattern as Item, Texture, Room, and GameObject
 export class Note {
-    name: string;
-    path: string;
-    displayName: string;
-    text: string;
-    loaded: boolean = false;
+    private name: string;
+    private path: string;
+    private displayName: string;
+    private text: string;
+    private loaded: boolean = false;
 
     constructor(name: string, path: string) {
         this.name = name;
@@ -45,10 +45,28 @@ export class Note {
     }
 
     /**
+     * Check if the Note has loaded
+     * @returns True if the Note has loaded
+     */
+    public hasLoaded(): boolean {
+        return this.loaded;
+    }
+
+    /**
+     * Check if the Note has loaded
+     * @throws An error if the Note has not loaded yet
+     */
+    public requireLoaded(): void {
+        if (!this.loaded) throw new Error(`❌📝 Note ${this.name} has not loaded yet`);
+    }
+
+    /**
      * Get the text of the Note
      * @returns The text of the Note
+     * @throws An error if the Note has not loaded yet
      */
     public getText(): string {
+        this.requireLoaded();
         return this.text;
     }
 
@@ -61,14 +79,12 @@ export class Note {
     }
 
     /**
-     * Check if the Note has loaded
-     * @returns True if the Note has loaded
+     * Get the JSON representation of the Note
+     * @returns The JSON representation of the Note
+     * @throws An error if the Note has not loaded yet
      */
-    public hasLoaded(): boolean {
-        return this.loaded;
-    }
-
     public toJSON(): NoteBlueprint {
+        this.requireLoaded();
         return {
             name: this.name,
             displayName: this.displayName,

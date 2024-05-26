@@ -12,13 +12,13 @@ export type RoomBlueprint = {
 }
 
 export class Room {
-    name: string;
-    path: string;
-    displayName?: string;
-    persistence?: boolean;
-    background?: string;
-    objects: { [key: string]: GameObject } = {};
-    interactions: Interaction[] = [];
+    private name: string;
+    private path: string;
+    private displayName?: string;
+    private persistence?: boolean;
+    private background?: string;
+    private objects: { [key: string]: GameObject } = {};
+    private interactions: Interaction[] = [];
     private loaded: boolean = false;
 
     constructor(name: string, path: string) {
@@ -60,12 +60,29 @@ export class Room {
         console.log(`✔️🚪 Room loaded: ${this.name}`);
     }
 
+    /**
+     * Check if the Room has loaded
+     * @returns True if the Room has loaded
+     */
     public hasLoaded(): boolean {
         return this.loaded;
     }
 
+    /**
+     * Check if the Room has loaded
+     * @throws An error if the Room has not loaded yet
+     */
+    public requireLoaded(): void {
+        if (!this.loaded) throw new Error(`❌🚪 Room ${this.name} has not loaded yet`);
+    }
+
+    /**
+     * Get the JSON representation of the Room
+     * @returns The JSON representation of the Room
+     * @throws An error if the Room has not loaded yet
+     */
     public toJSON(): RoomBlueprint {
-        if (!this.loaded) throw new Error(`Room ${this.name} has not loaded yet`);
+        this.requireLoaded();
         return {
             name: this.name,
             displayName: this.displayName || this.name,
@@ -76,16 +93,59 @@ export class Room {
         };
     }
 
+    /**
+     * Get the objects inside the Room
+     * @returns The objects inside the Room
+     * @throws An error if the Room has not loaded yet
+     */
     public getObjects(): GameObject[] {
-        if (!this.loaded) throw new Error(`Room ${this.name} has not loaded yet`);        
+        this.requireLoaded();
+
         return Object.values(this.objects);
     }
 
+    /**
+     * Get the interactions of the Room
+     * @returns The interactions of the Room
+     * @throws An error if the Room has not loaded yet
+     */
+    public getInteractions(): Interaction[] {
+        this.requireLoaded();
+
+        return this.interactions;
+    }
+
+    /**
+     * Get the display name of the Room
+     * @returns The display name of the Room
+     */
+    public getDisplayName(): string {
+        return this.displayName || this.name;
+    }
+
+    /**
+     * Get the background of the Room
+     * @returns The texture name of the background of the Room
+     * @throws An error if the Room has not loaded yet
+     */
+    public getBackground(): string {
+        this.requireLoaded();
+        
+        return this.background || "";
+    }
+
+    /**
+     * Get an object by name
+     * @param name The name of the object
+     * @returns The object with the specified name
+     * @throws An error if the object does not exist
+     */
     public getObject(name: string): GameObject {
-        if (!this.loaded) throw new Error(`Room ${this.name} has not loaded yet`);
+        this.requireLoaded();
         if (!this.objects[name]) {
             throw new Error(`Object ${name} not found in room ${this.name}`);
         }
+        
         return this.objects[name];
     }
 }

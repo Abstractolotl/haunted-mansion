@@ -55,17 +55,29 @@ export class Item {
     }
 
     /**
+     * Check if the Item has loaded
+     * @throws An error if the Item has not loaded yet
+     */
+    public requireLoaded(): void {
+        if (!this.loaded) throw new Error(`❌📦 Item ${this.name} has not loaded yet`);
+    }
+
+    /**
      * Get the interactions of the Item
      * @returns The interactions of the Item
+     * @throws An error if the Item has not loaded yet
      */
     public getInteractions(): Interaction[] {
+        this.requireLoaded();
         return this.interactions;
     }
 
     /**
      * Execute all actions of all interactions that passed their conditions
+     * @throws An error if the Item has not loaded yet
      */
     public executeInteractions(): void {
+        this.requireLoaded();
         let passedInteractions: Interaction[] = [];
 
         for (let interaction of this.interactions) {
@@ -82,8 +94,10 @@ export class Item {
     /**
      * Serialize the Item to a JSON object
      * @returns The JSON representation of the Item
+     * @throws An error if the Item has not loaded yet
      */
     public toJSON(): ItemBlueprint {
+        this.requireLoaded();
         return {
             name: this.name,
             displayName: this.displayName,

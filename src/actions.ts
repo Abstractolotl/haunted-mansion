@@ -123,7 +123,12 @@ class ShowNoteAction implements Action {
     }
 }
 
-// Factory function to create actions
+/**
+ * Create an action from an action blueprint
+ * @param action The action blueprint
+ * @returns The created action of the corresponding type
+ * @throws An error if the action type is invalid
+ */
 export function createAction(action: Action): Action {
     switch (action.type) {
         case "hideObject":
@@ -143,6 +148,6 @@ export function createAction(action: Action): Action {
         case "showNote":
             return new ShowNoteAction(action.options);
         default:
-            throw new Error(`Unknown action type: ${action.type}`);
+            throw new Error(`Invalid action type: ${action.type}`);
     }
 }

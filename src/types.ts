@@ -45,11 +45,22 @@ export type Entry = {
 export type Action = {
     type: string;
     options?: any;
+
+    /**
+     * Trigger the action
+     * @param gameContext The game context
+     */
     trigger(/*gameContext: ????*/): void; // TODO: what should the type of gameContext be? The action should be able to modify the game state
 }
 
 export type Condition = {
     type: string;
     options?: any;
+
+    /**
+     * Check the condition
+     * @param gameContext The game context
+     * @returns True if the condition is met
+     */
     check(/*gameContext: ????*/): boolean; // TODO: what should the type of gameContext be? The condition should be able to check the game state
 }

@@ -16,16 +16,16 @@ export class Game {
 
     constructor(configPath: string) {
         console.log("🎮 Game created");
+
         this.loadAssets(configPath);
-        /*let objects: { [key: string]: number } = {};
-        objects["a"] = 1;
-        objects["b"] = 2;
-        objects["c"] = 3;
-        console.log(objects);
-        console.log(Object.values(objects));*/
-        
     }
 
+    /**
+     * Load all assets for the game
+     * @param configPath The path to the game config
+     * @returns A promise that resolves when all assets have been loaded
+     * @throws An error if any asset could not be loaded
+     */
     private async loadAssets(configPath: string) {
         await this.loadGameConfig(configPath);
         await this.loadAssetIndex(this.config!.indexPath);
@@ -35,57 +35,81 @@ export class Game {
         this.loadRooms();
         this.loadItems();
         this.loadNotes();
-        
-        // TODO: Load items and notes
 
         await this.waitForAssets();
-
         console.log("🎮 Game assets loaded");
 
         // call all actions in all interactions in all objects in rooms
         // for testing, // TODO: remove
-        for (let room of this.rooms) {
+        /*for (let room of this.rooms) {
             for (let object of room.getObjects()) {
                 object.getInteractions().forEach((interaction) => {
                     interaction.executeActions();
                 });
             }
-        }
+        }*/
     }
 
+    /**
+     * Load the game config from the server
+     * @param configPath The path to the game config
+     * @returns A promise that resolves when the game config has been loaded
+     * @throws An error if the game config could not be loaded
+     */
     private async loadGameConfig(configPath: string) {
         console.log("🔧 Loading game config");
         this.config = await fetch(configPath).then(response => response.json());
         if (!this.config) {
-            throw new Error("❌ Game config could not be loaded, exiting...");
+            throw new Error("❌🔧 Game config could not be loaded, exiting...");
         }
         console.log("✔️🔧 Game config loaded");
     }
 
+    /**
+     * Load the asset index from the server
+     * @param indexPath The path to the asset index
+     * @returns A promise that resolves when the asset index has been loaded
+     * @throws An error if the asset index could not be loaded
+     */
     private async loadAssetIndex(indexPath: string) {
         console.log("📚 Loading asset index");
         this.index = await fetch(indexPath).then(response => response.json());
+        if (!this.index) {
+            throw new Error("❌📚 Asset index could not be loaded, exiting...");
+        }
         console.log("✔️📚 Asset index loaded");
     }
 
+    /**
+     * Load all textures from the asset index
+     */
     private loadTextures() {
         this.index!.textures!.forEach((entry) => {
             this.textures.push(new Texture(entry.name, entry.path));
         });
     }
 
+    /**
+     * Load all rooms from the asset index
+     */
     private loadRooms() {
         this.index!.rooms!.forEach((entry) => {
             this.rooms.push(new Room(entry.name, entry.path));
         });
     }
 
+    /**
+     * Load all items from the asset index
+     */
     private loadItems() {
         this.index!.items!.forEach((entry) => {
             this.items.push(new Item(entry.name, entry.path));
         });
     }
 
+    /**
+     * Load all notes from the asset index
+     */
     private loadNotes() {
         this.index!.notes!.forEach((entry) => {
             this.notes.push(new Note(entry.name, entry.path));

@@ -20,7 +20,12 @@ class SelectedItemCondition implements Condition {
     }
 }
 
-// Factory function to create conditions
+/**
+ * Create a condition from an condition blueprint
+ * @param condition The condition blueprint
+ * @returns The created condition of the corresponding type
+ * @throws An error if the condition type is invalid
+ */
 export function createCondition(condition: Condition): Condition {
     switch (condition.type) {
         case "selected_item":

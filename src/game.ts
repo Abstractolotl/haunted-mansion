@@ -1,7 +1,7 @@
-import { Item } from "./Item";
-import { Note } from "./Note";
-import { Room } from "./Room";
-import { Texture } from "./Texture";
+import { Item } from "./elements/objects/item";
+import { Note } from "./elements/objects/note";
+import { Room } from "./elements/objects/room";
+import { Texture } from "./elements/objects/texture";
 import { AssetIndex, GameConfig } from "./types";
 
 export class Game {

@@ -1,6 +1,6 @@
-import { Interaction, InteractionBlueprint } from "./Interaction";
+import { Interaction, InteractionBlueprint } from "../logic/interaction";
 
-// same as Texture.ts:
+// same as texture.ts:
 export type ItemBlueprint = {
     name: string;
     displayName: string;

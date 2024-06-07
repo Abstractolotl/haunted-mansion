@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-
     let background = new Background(SCALE.getGridConfig(), CONFIG.getSceneBorder(), game);
     let testGrid = new Grid(SCALE.getGridConfig());
 
@@ -35,9 +34,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     let gamePosX = 1 + padding;
     let gamePosY = inventoryHeight + 2 + padding;
 
-    background.drawFile('outside_background.txt', gamePosX, gamePosY);
-    testGrid.drawFile('objects/small_window_broken.txt', gamePosX + 32, gamePosY + 6);
     //background.drawBorder(gameSizeX, gameSizeY, inventoryHeight, actionLogWidth)
+    testGrid.drawFile('outside_background.txt', 10, 25);
+    testGrid.drawFile('objects/small_window.txt', 42, 31);
+
     game.append(testGrid.getElement());
 
 

@@ -2,7 +2,7 @@
   "entryRoomId": "room1",
   "startingItems": [],
   "interface": {
-    "scene": [74, 16],
+    "scene": [150, 16],
     "actionLog": 32,
     "inventory": {
       "rows": 1,

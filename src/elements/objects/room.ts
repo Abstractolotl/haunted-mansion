@@ -1,4 +1,4 @@
-import { Interaction, InteractionBlueprint } from "./Interaction";
+import { Interaction, InteractionBlueprint } from "../logic/interaction";
 import { GameObject, GameObjectBlueprint } from "./GameObject";
 
 

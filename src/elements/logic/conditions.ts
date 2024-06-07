@@ -1,10 +1,8 @@
-import { Condition } from "./types";
-
+import { Condition } from "@/types";
 
 //
 // Logic
 //
-
 class OrCondition implements Condition {
     type: "or" = "or";
     conditions: Condition[];

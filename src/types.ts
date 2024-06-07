@@ -1,14 +1,8 @@
-export type Dimensions = {
-    width: number;
-    height: number;
-}
-
 export type GridConfig = {
     width: number;
     height: number;
     size: number;
 }
-
 
 // game.json
 export type GameConfig = {
@@ -27,7 +21,6 @@ export type InterfaceConfig = {
     },
     padding?: number;
 }
-
 
 // index
 export type AssetIndex = {

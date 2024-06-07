@@ -1,5 +1,3 @@
-import * as fileSystem from 'fs';
-
 export class FileParser {
 
     public static parse(file: string): string[][] {

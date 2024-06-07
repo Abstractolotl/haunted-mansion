@@ -1,6 +1,6 @@
 import { createAction } from "./actions";
 import { createCondition } from "./conditions";
-import { Action, Condition } from "./types";
+import { Action, Condition } from "@/types";
 
 export type InteractionBlueprint = {
     conditions: Condition[];

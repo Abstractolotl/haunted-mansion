@@ -1,4 +1,4 @@
-import {Dimensions, GridConfig} from "@/types";
+import {GridConfig} from "@/types";
 import {FileParser} from "@/lib/file-parser";
 
 export class Grid {
@@ -86,7 +86,7 @@ export class Row {
 
     public resize(size: number) {
         this.columns.forEach(column => {
-            column.style.width = `${size}px`;
+            column.style.width = `${size/2}px`;
             column.style.height = `${size}px`;
         });
     }

@@ -1,11 +1,9 @@
-import { Action } from "./types";
-
+import { Action } from "@/types";
 
 //
 //  ROOMS
 //  TODO: Implement the rest of the room actions
 //
-
 class GoToRoomAction implements Action {
     type: "goToRoom" = "goToRoom";
     options: {

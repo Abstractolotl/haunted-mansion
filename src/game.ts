@@ -18,6 +18,7 @@ export class Game {
         console.log("🎮 Game created");
 
         this.loadAssets(configPath);
+        // TODO: Start game
     }
 
     /**

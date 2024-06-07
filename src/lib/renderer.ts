@@ -6,6 +6,10 @@ export class Renderer {
         // TODO: verify config
     }
 
+    private renderInventory() {
+        // TODO: render inventory
+    }
+
     private renderBackground() {
         // TODO: render background
     }

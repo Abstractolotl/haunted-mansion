@@ -9,10 +9,10 @@ export class Game {
     private config?: GameConfig;
 
     // assets
-    private rooms: Room[] = [];
-    private items: Item[] = [];
-    private notes: Note[] = [];
-    private textures: Texture[] = [];
+    private rooms: { [name: string]: Room } = {};
+    private items: { [name: string]: Item } = {};
+    private notes: { [name: string]: Note } = {};
+    private textures: { [name: string]: Texture } = {};
 
     constructor(configPath: string) {
         console.log("🎮 Game created");
@@ -85,8 +85,8 @@ export class Game {
      * Load all textures from the asset index
      */
     private loadTextures() {
-        this.index!.textures!.forEach((entry) => {
-            this.textures.push(new Texture(entry.name, entry.path));
+        this.index!.textures!.forEach((texture) => {
+            this.textures[texture.name] = new Texture(texture.name, texture.path);
         });
     }
 
@@ -95,7 +95,7 @@ export class Game {
      */
     private loadRooms() {
         this.index!.rooms!.forEach((entry) => {
-            this.rooms.push(new Room(entry.name, entry.path));
+            this.rooms[entry.name] = new Room(entry.name, entry.path);
         });
     }
 
@@ -103,8 +103,8 @@ export class Game {
      * Load all items from the asset index
      */
     private loadItems() {
-        this.index!.items!.forEach((entry) => {
-            this.items.push(new Item(entry.name, entry.path));
+        this.index!.items!.forEach((item) => {
+            this.items[item.name] = new Item(item.name, item.path);
         });
     }
 
@@ -112,8 +112,8 @@ export class Game {
      * Load all notes from the asset index
      */
     private loadNotes() {
-        this.index!.notes!.forEach((entry) => {
-            this.notes.push(new Note(entry.name, entry.path));
+        this.index!.notes!.forEach((note) => {
+            this.notes[note.name] = new Note(note.name, note.path);
         });
     }
 
@@ -123,10 +123,10 @@ export class Game {
      */
     private async waitForAssets() {
         while (true) {
-            const allTexturesLoaded = this.textures.every(texture => texture.hasLoaded());
-            const allRoomsLoaded = this.rooms.every(room => room.hasLoaded());
-            const allItemsLoaded = this.items.every(item => item.hasLoaded());
-            const allNotesLoaded = this.notes.every(note => note.hasLoaded());
+            const allTexturesLoaded = Object.values(this.textures).every(texture => texture.hasLoaded());
+            const allRoomsLoaded = Object.values(this.rooms).every(room => room.hasLoaded());
+            const allItemsLoaded = Object.values(this.items).every(item => item.hasLoaded());
+            const allNotesLoaded = Object.values(this.notes).every(note => note.hasLoaded());
 
             if (allTexturesLoaded && allRoomsLoaded && allItemsLoaded && allNotesLoaded) {
                 return;
@@ -136,4 +136,37 @@ export class Game {
             await new Promise(resolve => setTimeout(resolve, 50));
         }
     }
+
+    public getRoom(name: string): Room {
+        return this.rooms[name];
+    }
+
+    public getRooms(): { [name: string]: Room } {
+        return this.rooms;
+    }
+
+    public getTexture(name: string): Texture {
+        return this.textures[name];
+    }
+
+    public getTextures(): { [name: string]: Texture } {
+        return this.textures;
+    }
+
+    public getItem(name: string): Item {
+        return this.items[name];
+    }
+
+    public getItems(): { [name: string]: Item } {
+        return this.items;
+    }
+
+    public getNote(name: string): Note {
+        return this.notes[name];
+    }
+
+    public getNotes(): { [name: string]: Note } {
+        return this.notes;
+    }
+
 }

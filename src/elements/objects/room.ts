@@ -1,5 +1,5 @@
 import { Interaction, InteractionBlueprint } from "../logic/interaction";
-import { GameObject, GameObjectBlueprint } from "./GameObject";
+import { GameObject, GameObjectBlueprint } from "./game-object";
 
 
 export type RoomBlueprint = {

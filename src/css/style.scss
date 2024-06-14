@@ -46,9 +46,18 @@ $text-dark: #f5f5f5;
   }
 }
 
+.interactable {
+  cursor: pointer;
+}
+
 /**
  * Layer system default z-index values
  */
+.objects {
+  position: absolute;
+  z-index: 2;
+}
+
 .grid {
   position: absolute;
   z-index: 1;

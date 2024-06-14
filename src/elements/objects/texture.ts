@@ -9,9 +9,11 @@ export class Texture {
         this.path = path;
 
         // start loading the texture asynchonously
-        this.loadTexture();
+        this.loadTexture()
+            .then(r => r)
+            .catch(e => console.error(e));
     }
-    
+
     /**
      * Load the texture from the server
      * @returns A promise that resolves when the texture has been loaded

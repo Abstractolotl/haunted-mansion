@@ -3,10 +3,14 @@ import { Note } from "./elements/objects/note";
 import { Room } from "./elements/objects/room";
 import { Texture } from "./elements/objects/texture";
 import { AssetIndex, GameConfig } from "./types";
+import {Renderer} from "@/lib/renderer";
+import {ConfigHelper} from "@/lib/config-helper";
 
 export class Game {
     private index?: AssetIndex;
     private config?: GameConfig;
+
+    private renderer?: Renderer;
 
     // assets
     private rooms: { [name: string]: Room } = {};
@@ -17,8 +21,25 @@ export class Game {
     constructor(configPath: string) {
         console.log("🎮 Game created");
 
-        this.loadAssets(configPath);
-        // TODO: Start game
+    }
+
+    async start(configPath: string) {
+        console.log("🎮 Initializing game")
+
+        await this.loadAssets(configPath);
+        await this.waitForAssets()
+
+        let configHelper = new ConfigHelper(this.config!);
+        this.renderer = new Renderer(configHelper, this.textures);
+
+        // Find the starting room
+        const startingRoom = this.rooms[this.config!.entryRoomId];
+        if (!startingRoom) {
+            throw new Error(`❌🎮 Starting room ${this.config!.entryRoomId} not found`);
+        }
+
+        console.log("🎮 Starting game in room: " + startingRoom.getDisplayName());
+        this.renderer.changeScene(startingRoom);
     }
 
     /**
@@ -128,7 +149,7 @@ export class Game {
             const allItemsLoaded = Object.values(this.items).every(item => item.hasLoaded());
             const allNotesLoaded = Object.values(this.notes).every(note => note.hasLoaded());
 
-            if (allTexturesLoaded && allRoomsLoaded && allItemsLoaded && allNotesLoaded) {
+            if (allTexturesLoaded && allRoomsLoaded && allItemsLoaded && allNotesLoaded && this.config) {
                 return;
             }
     

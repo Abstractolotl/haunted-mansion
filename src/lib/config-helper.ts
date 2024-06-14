@@ -1,12 +1,16 @@
 import {GameConfig} from "@/types";
 
-export class Config {
+export class ConfigHelper {
 
     private gameConfig: GameConfig | undefined;
     public async load() {
         let response = await fetch('./config/game.json');
         let config = await response.json();
         this.gameConfig = config as GameConfig;
+    }
+
+    public constructor(config: GameConfig) {
+        this.gameConfig = config;
     }
 
     getSceneBorder() {

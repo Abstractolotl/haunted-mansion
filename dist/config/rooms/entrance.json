@@ -4,7 +4,8 @@
 	"persistence": true,
 	"background": "entrance_background",
 	"objects": [
-		{   "name": "entrance_door",
+		{
+      "name": "entrance_door",
 			"posX": 4,
 			"posY": 1,
 			"texture": "entrance_door",
@@ -18,7 +19,8 @@
 				}]
 			}]
 		},
-		{   "name": "entrance_window",
+		{
+      "name": "entrance_window",
 			"posX": 25,
 			"posY": 7,
 			"texture": "window",
@@ -63,13 +65,15 @@
 				]
 			}]
 		},
-		{   "name": "entrance_window_broken",
+		{
+      "name": "entrance_window_broken",
 			"posX": 25,
 			"posY": 7,
 			"texture": "window_broken",
 			"hidden": true
 		},
-		{   "name": "entrance_beer",
+		{
+      "name": "entrance_beer",
 			"posX": 47,
 			"posY": 8,
 			"texture": "object_beer",
@@ -93,7 +97,8 @@
 				}
 			]
 		},
-		{   "name": "entrance_rock",
+		{
+      "name": "entrance_rock",
 			"posX": 23,
 			"posY": 0,
 			"texture": "object_rock",

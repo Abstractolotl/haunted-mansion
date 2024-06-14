@@ -3,10 +3,10 @@ import {FileParser} from "@/lib/file-parser";
 
 export class Grid {
 
-    private element: HTMLElement;
-    private rows: Row[] = [];
+    protected element: HTMLElement;
+    protected rows: Row[] = [];
 
-    private config: GridConfig;
+    protected config: GridConfig;
 
     constructor(config: GridConfig, className: string = 'grid') {
         this.element = document.createElement('div');
@@ -32,7 +32,7 @@ export class Grid {
         return this.element;
     }
 
-    private createRows() {
+    protected createRows() {
         for (let i = 0; i < this.config.height; i++) {
             const row= new Row(this.config.width, this.config.size);
             this.element.appendChild(row.getElement());
@@ -66,8 +66,8 @@ export class Grid {
 
 export class Row {
 
-    private element: HTMLElement;
-    private columns: HTMLElement[] = [];
+    protected element: HTMLElement;
+    protected columns: HTMLElement[] = [];
 
     constructor(width: number, size: number) {
         this.element = document.createElement('div');

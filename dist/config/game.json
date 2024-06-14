@@ -2,11 +2,12 @@
   "entryRoomId": "entrance",
   "startingItems": [],
   "interface": {
-    "scene": [150, 16],
+    "scene": [124, 10],
     "actionLog": 32,
     "padding": 5,
     "inventory": {
-      "rows": 1,
+      "rows": 2,
+      "columns": 5,
       "slotSize": [5, 3]
     }
   },

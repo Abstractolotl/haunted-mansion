@@ -29,7 +29,7 @@ export class Renderer {
         this.GAME_OFFSET_Y = config.getSceneBorder()[1] + config.getPadding();
 
         this.scale = new Scale();
-        this.background = new Background(this.scale.getGridConfig(), config.getSceneBorder(), gameParent);
+        this.background = new Background(this.scale.getGridConfig(), config, gameParent);
 
         this.roomGrid = new Grid(this.scale.getGridConfig());
         this.objectGrid = new InteractableGrid(this.scale.getGridConfig(), 'objects');

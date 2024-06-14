@@ -1,5 +1,6 @@
 import {Grid} from "./grid";
-import {GridConfig} from "@/types";
+import {GameConfig, GridConfig} from "@/types";
+import {ConfigHelper} from "@/lib/config-helper";
 
 export default class Background {
 
@@ -8,20 +9,21 @@ export default class Background {
     private gridConfig: GridConfig;
     private grid: Grid;
 
-    constructor(gridConfig: GridConfig, sceneBorder: number[], parent: HTMLElement) {
+    constructor(gridConfig: GridConfig, config: ConfigHelper, parent: HTMLElement) {
         this.gridConfig = gridConfig;
         this.parent = parent;
 
         this.grid = new Grid(this.gridConfig, 'background');
         this.parent.appendChild(this.grid.getElement());
 
-        this.fill({x: 0, y: sceneBorder[1]}, {x: sceneBorder[0], y: sceneBorder[1]}, '-')
-        this.fill({x: sceneBorder[0], y: 0}, {x: sceneBorder[0], y: this.gridConfig.height}, '|')
-
-        this.drawGameBorder(sceneBorder)
+        this.drawInventoryBorder(config.getInventorySize(), config.getSceneBorder()[0])
+        this.drawGameBorder(config.getSceneBorder())
     }
 
     private drawGameBorder(sceneBorder: number[]) {
+        this.fill({x: 0, y: sceneBorder[1]}, {x: sceneBorder[0], y: sceneBorder[1]}, '-')
+        this.fill({x: sceneBorder[0], y: 0}, {x: sceneBorder[0], y: this.gridConfig.height}, '|')
+
         this.fill({x: 0, y: 0}, {x: 0, y: this.gridConfig.height}, '|')
         this.fill({x: this.gridConfig.width - 1, y: 0}, {x: this.gridConfig.width - 1 , y: this.gridConfig.height}, '|')
 
@@ -39,6 +41,33 @@ export default class Background {
 
         this.draw('.', 0, this.gridConfig.height - 1);
         this.draw('.', this.gridConfig.width - 1, this.gridConfig.height - 1);
+    }
+
+    private drawInventoryBorder(inventorySize: { rows: number; slotSize: number[]; }, actionLogStartX: number = 0) {
+        let maxX = actionLogStartX - 2;
+        let start = {x: 2, y: 1}
+
+        let columns = Math.floor((maxX - start.x) / (inventorySize.slotSize[0] + 1))
+
+        for (let y = 0; y < inventorySize.rows; y++) {
+            for (let x = 0; x < columns; x++) {
+                this.draw('+', start.x, start.y)
+                this.fill({x: start.x + 1, y: start.y}, {x: start.x + inventorySize.slotSize[0], y: start.y}, '-')
+                this.draw('+', start.x + inventorySize.slotSize[0] + 1, start.y)
+
+                this.fill({x: start.x, y: start.y + 1}, {x: start.x, y: start.y + inventorySize.slotSize[1]}, '|')
+                this.fill({x: start.x + inventorySize.slotSize[0] + 1, y: start.y + 1}, {x: start.x + inventorySize.slotSize[0] + 1, y: start.y + inventorySize.slotSize[1]}, '|')
+
+                this.draw('+', start.x, start.y + inventorySize.slotSize[1] + 1)
+                this.fill({x: start.x + 1, y: start.y + inventorySize.slotSize[1] + 1}, {x: start.x + inventorySize.slotSize[0], y: start.y + inventorySize.slotSize[1] + 1}, '-')
+                this.draw('+', start.x + inventorySize.slotSize[0] + 1, start.y + inventorySize.slotSize[1] + 1)
+
+                start.x += inventorySize.slotSize[0] + 1;
+            }
+            start.x = 2;
+            start.y += inventorySize.slotSize[1] + 1;
+        }
+
     }
 
     // TODO: where should the border actually be drawn? What layer should it be on?

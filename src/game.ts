@@ -12,16 +12,13 @@ export class Game {
 
     private renderer?: Renderer;
 
+    private inventory: Item[] = [];
+
     // assets
     private rooms: { [name: string]: Room } = {};
     private items: { [name: string]: Item } = {};
     private notes: { [name: string]: Note } = {};
     private textures: { [name: string]: Texture } = {};
-
-    constructor(configPath: string) {
-        console.log("🎮 Game created");
-
-    }
 
     async start(configPath: string) {
         console.log("🎮 Initializing game")
@@ -60,16 +57,6 @@ export class Game {
 
         await this.waitForAssets();
         console.log("🎮 Game assets loaded");
-
-        // call all actions in all interactions in all objects in rooms
-        // for testing, // TODO: remove
-        /*for (let room of this.rooms) {
-            for (let object of room.getObjects()) {
-                object.getInteractions().forEach((interaction) => {
-                    interaction.executeActions();
-                });
-            }
-        }*/
     }
 
     /**

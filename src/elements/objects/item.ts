@@ -1,3 +1,4 @@
+import { Game } from "@/game";
 import { Interaction, InteractionBlueprint } from "../logic/interaction";
 
 // same as texture.ts:
@@ -15,11 +16,13 @@ export class Item {
     texture: string = "";
     interactions: Interaction[] = [];
     loaded: boolean = false;
+    private gameContext: Game;
 
-    constructor(name: string, path: string) {
+    constructor(name: string, path: string, gameContext: Game) {
         this.name = name;
         this.displayName = name;
         this.path = path;
+        this.gameContext = gameContext;
 
         // start loading the item asynchonously
         this.loadItem();
@@ -81,13 +84,13 @@ export class Item {
         let passedInteractions: Interaction[] = [];
 
         for (let interaction of this.interactions) {
-            if (interaction.checkConditions()) {
+            if (interaction.checkConditions(this.gameContext)) {
                 passedInteractions.push(interaction);
             }
         }
 
         for (let interaction of passedInteractions) {
-            interaction.executeActions();
+            interaction.executeActions(this.gameContext);
         }
     }
 

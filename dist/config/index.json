@@ -40,12 +40,20 @@
             "path": "objects/entrance_door.txt"
         },
         {
+            "name": "outside_door",
+            "path": "objects/outside_door.txt"
+        },
+        {
             "name": "window",
             "path": "objects/window.txt"
         },
         {
             "name": "window_broken",
             "path": "objects/window_broken.txt"
+        },
+        {
+            "name": "small_window",
+            "path": "objects/small_window.txt"
         },
         {
             "name": "small_window_broken",

@@ -1,3 +1,4 @@
+import { Game } from "@/game";
 import { Action } from "@/types";
 
 //
@@ -15,8 +16,9 @@ class GoToRoomAction implements Action {
         this.options = options;
     }
 
-    trigger(): void {
+    trigger(game: Game): void {
         console.log(`Going to room: ${this.options.roomName}`); // TODO: Implement the logic to go to the room
+        game.goToRoom(this.options.roomName);
     }
 }
 
@@ -38,8 +40,14 @@ class HideObjectAction implements Action {
         this.options = options;
     }
 
-    trigger(): void {
+    trigger(gameContext: Game): void {
         console.log(`Hiding object with ID: ${this.options.id}`); // TODO: Implement the logic to hide the object
+        const object = gameContext.getObjectByName(this.options.id);
+        if (!object) return;
+        console.log("found object, hiding it");
+        
+        object.hidden = true;
+        gameContext.rerennder();
     }
 }
 
@@ -53,8 +61,12 @@ class RevealObjectAction implements Action {
         this.options = options;
     }
 
-    trigger(): void {
+    trigger(gameContext: Game): void {
         console.log(`Revealing object with ID: ${this.options.id}`); // TODO: Implement the logic to reveal the object
+        const object = gameContext.getObjectByName(this.options.id);
+        if (!object) return;
+        object.hidden = false;
+        gameContext.rerennder();
     }
 }
 
@@ -77,7 +89,7 @@ class GiveItemAction implements Action {
         this.options = options;
     }
 
-    trigger(): void {
+    trigger(gameContext: Game): void {
         console.log(`Giving item with ID: ${this.options.id}`); // TODO: Implement the logic to give the item
     }
 }
@@ -99,7 +111,7 @@ class GrantNoteAction implements Action {
         this.options = options;
     }
 
-    trigger(): void {
+    trigger(gameContext: Game): void {
         console.log(`Granting note: ${this.options.noteName}`); // TODO: Implement the logic to grant the note
     }
 }
@@ -114,7 +126,7 @@ class ShowNoteAction implements Action {
         this.options = options;
     }
 
-    trigger(): void {
+    trigger(gameContext: Game): void {
         console.log(`Showing note: ${this.options.noteName}`); // TODO: Implement the logic to show the note
     }
 }
@@ -144,7 +156,7 @@ class PlaySoundAction implements Action {
         this.options = options;
     }
 
-    trigger(): void {
+    trigger(gameContext: Game): void {
         console.log(`Playing sound with ID: ${this.options.id}`); // TODO: Implement the logic to play the sound
     }
 }
@@ -165,7 +177,7 @@ class PrintActionLogAction implements Action {
         this.options = options;
     }
 
-    trigger(): void {
+    trigger(gameContext: Game): void {
         console.log(`Log: ${this.options.text}`); // TODO: Implement the logic to print the action log
     }
 }

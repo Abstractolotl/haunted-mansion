@@ -1,3 +1,4 @@
+import { Game } from "@/game";
 import { Interaction, InteractionBlueprint } from "../logic/interaction";
 import { GameObject, GameObjectBlueprint } from "./game-object";
 
@@ -20,10 +21,12 @@ export class Room {
     private objects: { [key: string]: GameObject } = {};
     private interactions: Interaction[] = [];
     private loaded: boolean = false;
+    private gameContext: Game;
 
-    constructor(name: string, path: string) {
+    constructor(name: string, path: string, gameContext: Game) {
         this.name = name;
         this.path = path;
+        this.gameContext = gameContext;
 
         // start loading the room asynchonously
         this.loadRoom();
@@ -49,7 +52,7 @@ export class Room {
         this.background = room.background;
 
         for (let object of room.objects || []) {
-            this.objects[object.name] = new GameObject(object);
+            this.objects[object.name] = new GameObject(object, this.gameContext);
         }
 
         for (let interaction of room.interactions || []) {
@@ -140,10 +143,10 @@ export class Room {
      * @returns The object with the specified name
      * @throws An error if the object does not exist
      */
-    public getObject(name: string): GameObject {
+    public getObjectByName(name: string): GameObject | undefined {
         this.requireLoaded();
         if (!this.objects[name]) {
-            throw new Error(`Object ${name} not found in room ${this.name}`);
+            return undefined
         }
         
         return this.objects[name];

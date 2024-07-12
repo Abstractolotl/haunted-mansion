@@ -5,12 +5,14 @@ import { Texture } from "./elements/objects/texture";
 import { AssetIndex, GameConfig } from "./types";
 import {Renderer} from "@/lib/renderer";
 import {ConfigHelper} from "@/lib/config-helper";
+import { GameObject } from "./elements/objects/game-object";
 
 export class Game {
     private index?: AssetIndex;
     private config?: GameConfig;
 
     private renderer?: Renderer;
+    private room?: Room;
 
     private inventory: Item[] = [];
 
@@ -34,9 +36,18 @@ export class Game {
         if (!startingRoom) {
             throw new Error(`❌🎮 Starting room ${this.config!.entryRoomId} not found`);
         }
-
+        this.room = startingRoom;
         console.log("🎮 Starting game in room: " + startingRoom.getDisplayName());
         this.renderer.changeScene(startingRoom);
+    }
+
+    public goToRoom(roomName: string) {
+        const room = this.rooms[roomName];
+        if (!room) {
+            throw new Error(`❌🎮 Room ${roomName} not found`);
+        }
+        this.room = room;
+        this.renderer!.changeScene(room);
     }
 
     /**
@@ -103,7 +114,7 @@ export class Game {
      */
     private loadRooms() {
         this.index!.rooms!.forEach((entry) => {
-            this.rooms[entry.name] = new Room(entry.name, entry.path);
+            this.rooms[entry.name] = new Room(entry.name, entry.path, this);
         });
     }
 
@@ -112,7 +123,7 @@ export class Game {
      */
     private loadItems() {
         this.index!.items!.forEach((item) => {
-            this.items[item.name] = new Item(item.name, item.path);
+            this.items[item.name] = new Item(item.name, item.path, this);
         });
     }
 
@@ -121,7 +132,7 @@ export class Game {
      */
     private loadNotes() {
         this.index!.notes!.forEach((note) => {
-            this.notes[note.name] = new Note(note.name, note.path);
+            this.notes[note.name] = new Note(note.name, note.path, this);
         });
     }
 
@@ -175,6 +186,19 @@ export class Game {
 
     public getNotes(): { [name: string]: Note } {
         return this.notes;
+    }
+
+    public getObjectByName(name: string): GameObject | undefined {
+        for (const room of Object.values(this.rooms)) {
+            const object = room.getObjectByName(name);
+            if (object) {
+                return object;
+            }
+        }
+    }
+
+    public rerennder() {
+        this.renderer?.changeScene(this.room!);
     }
 
 }

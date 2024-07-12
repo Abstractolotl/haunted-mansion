@@ -1,3 +1,4 @@
+import { Game } from "@/game";
 import { createAction } from "./actions";
 import { createCondition } from "./conditions";
 import { Action, Condition } from "@/types";
@@ -28,18 +29,18 @@ export class Interaction {
         return this.actions;
     }
 
-    public checkConditions(): boolean {
+    public checkConditions(gameContext: Game): boolean {
         for (let condition of this.conditions) {
-            if (!condition.check()) {
+            if (!condition.check(gameContext)) {
                 return false;
             }
         }
         return true;
     }
 
-    public executeActions() {
+    public executeActions(gameContext: Game) {
         for (let action of this.actions) {
-            action.trigger();
+            action.trigger(gameContext);
         }
     }
 

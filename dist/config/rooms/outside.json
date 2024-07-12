@@ -100,7 +100,22 @@
                     ]
                 }
             ]
-            
+        },
+        {   "name": "outside_door",
+            "posX": 41,
+            "posY": 2,
+            "texture": "outside_door",
+            "interactions": [
+                {
+                    "conditions": [],
+                    "actions": [{
+                        "type": "goToRoom",
+                        "options": {
+                            "roomName": "entrance"
+                        }
+                    }]
+                }
+            ]
         }
     ]
 }

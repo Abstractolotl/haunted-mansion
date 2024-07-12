@@ -1,3 +1,4 @@
+import { Game } from "@/game";
 import { Interaction, InteractionBlueprint } from "../logic/interaction";
 
 
@@ -17,8 +18,10 @@ export class GameObject {
     texture: string;
     hidden: boolean;
     interactions: Interaction[] = [];
+    gameContext: Game;
 
-    constructor(blueprint: GameObjectBlueprint) {
+    constructor(blueprint: GameObjectBlueprint, gameContext: Game) {
+        this.gameContext = gameContext;
         this.name = blueprint.name;
         this.posX = blueprint.posX;
         this.posY = blueprint.posY;
@@ -44,14 +47,22 @@ export class GameObject {
         let passedInteractions: Interaction[] = [];
 
         for (let interaction of this.interactions) {
-            if (interaction.checkConditions()) {
+            if (interaction.checkConditions(this.gameContext)) {
                 passedInteractions.push(interaction);
             }
         }
 
         for (let interaction of passedInteractions) {
-            interaction.executeActions();
+            interaction.executeActions(this.gameContext);
         }
+    }
+
+    /**
+     * Check if the GameObject is hidden
+     * @returns True if the GameObject is hidden
+     */
+    public isHidden(): boolean {
+        return this.hidden;
     }
 
     /**

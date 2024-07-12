@@ -1,3 +1,4 @@
+import { Game } from "@/game";
 import { Condition } from "@/types";
 
 //
@@ -11,9 +12,9 @@ class OrCondition implements Condition {
         this.conditions = options.conditions;
     }
 
-    check(): boolean {
+    check(gameContext: Game): boolean {
         for (let condition of this.conditions) {
-            if (condition.check()) {
+            if (condition.check(gameContext)) {
                 return true;
             }
         }
@@ -32,9 +33,9 @@ class AndCondition implements Condition {
         this.conditions = options.conditions;
     }
 
-    check(): boolean {
+    check(gameContext: Game): boolean {
         for (let condition of this.conditions) {
-            if (!condition.check()) {
+            if (!condition.check(gameContext)) {
                 return false;
             }
         }
@@ -50,8 +51,8 @@ class NotCondition implements Condition {
         this.condition = options.condition;
     }
 
-    check(): boolean {
-        return !this.condition.check();
+    check(gameContext: Game): boolean {
+        return !this.condition.check(gameContext);
     }
 }
 
@@ -63,10 +64,10 @@ class XorCondition implements Condition {
         this.conditions = options.conditions;
     }
 
-    check(): boolean {
+    check(gameContext: Game): boolean {
         let count = 0;
         for (let condition of this.conditions) {
-            if (condition.check()) {
+            if (condition.check(gameContext)) {
                 count++;
             }
         }
@@ -90,7 +91,7 @@ class SelectedItemCondition implements Condition {
         this.options = options;
     }
 
-    check(): boolean {
+    check(gameContext: Game): boolean {
         // TODO: Implement the logic to check if the item is selected
         console.log(`Checking if item is selected: ${this.options.itemName}`);
         return true; // Placeholder

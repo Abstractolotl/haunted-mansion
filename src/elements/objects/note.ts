@@ -1,3 +1,5 @@
+import { Game } from "@/game";
+
 export type NoteBlueprint = {
     name: string;
     displayName: string;
@@ -11,12 +13,14 @@ export class Note {
     private displayName: string;
     private text: string;
     private loaded: boolean = false;
+    private gameContext: Game;
 
-    constructor(name: string, path: string) {
+    constructor(name: string, path: string, gameContext: Game) {
         this.name = name;
         this.path = path;
         this.displayName = name;
         this.text = "";
+        this.gameContext = gameContext;
 
         // start loading the note asynchonously
         this.loadNote();

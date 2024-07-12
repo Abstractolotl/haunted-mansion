@@ -1,3 +1,5 @@
+import { Game } from "./game";
+
 export type GridConfig = {
     width: number;
     height: number;
@@ -43,7 +45,7 @@ export type Action = {
      * Trigger the action
      * @param gameContext The game context
      */
-    trigger(/*gameContext: ????*/): void; // TODO: what should the type of gameContext be? The action should be able to modify the game state
+    trigger(gameContext: Game): void; // TODO: what should the type of gameContext be? The action should be able to modify the game state
 }
 
 export type Condition = {
@@ -55,5 +57,5 @@ export type Condition = {
      * @param gameContext The game context
      * @returns True if the condition is met
      */
-    check(/*gameContext: ????*/): boolean; // TODO: what should the type of gameContext be? The condition should be able to check the game state
+    check(gameContext: Game): boolean; // TODO: what should the type of gameContext be? The condition should be able to check the game state
 }

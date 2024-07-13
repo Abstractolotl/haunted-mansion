@@ -108,12 +108,20 @@
             "interactions": [
                 {
                     "conditions": [],
-                    "actions": [{
-                        "type": "goToRoom",
-                        "options": {
-                            "roomName": "entrance"
+                    "actions": [
+                        {
+                            "type": "goToRoom",
+                            "options": {
+                                "roomName": "entrance"
+                            }
+                        },
+                        {
+                            "type": "incrementVariable",
+                            "options": {
+                                "name": "used_door"
+                            }
                         }
-                    }]
+                    ]
                 }
             ]
         }

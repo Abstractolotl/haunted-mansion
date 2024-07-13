@@ -11,12 +11,20 @@
 			"texture": "entrance_door",
 			"interactions": [{
 				"conditions": [],
-				"actions": [{
-					"type": "goToRoom",
-					"options": {
-						"roomName": "outside"
+				"actions": [
+					{
+						"type": "goToRoom",
+						"options": {
+							"roomName": "outside"
+						}
+					},
+					{
+						"type": "incrementVariable",
+						"options": {
+							"name": "used_door"
+						}
 					}
-				}]
+				]
 			}]
 		},
 		{

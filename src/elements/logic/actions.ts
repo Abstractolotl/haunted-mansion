@@ -1,5 +1,5 @@
 import { Game } from "@/game";
-import { Action } from "@/types";
+import { Action, ConfigurationError } from "@/types";
 
 //
 //  ROOMS
@@ -41,13 +41,11 @@ class HideObjectAction implements Action {
     }
 
     trigger(gameContext: Game): void {
-        console.log(`Hiding object with ID: ${this.options.id}`); // TODO: Implement the logic to hide the object
         const object = gameContext.getObjectByName(this.options.id);
         if (!object) return;
-        console.log("found object, hiding it");
         
         object.hidden = true;
-        gameContext.rerennder();
+        gameContext.rerender();
     }
 }
 
@@ -62,11 +60,11 @@ class RevealObjectAction implements Action {
     }
 
     trigger(gameContext: Game): void {
-        console.log(`Revealing object with ID: ${this.options.id}`); // TODO: Implement the logic to reveal the object
         const object = gameContext.getObjectByName(this.options.id);
         if (!object) return;
+
         object.hidden = false;
-        gameContext.rerennder();
+        gameContext.rerender();
     }
 }
 
@@ -137,9 +135,65 @@ class ShowNoteAction implements Action {
 //  TODO: Implement the rest of the variable actions
 //
 
-// class SetVariableAction
-// class IncrementVariableAction
-// class DecrementVariableAction
+class SetVariableAction implements Action {
+    type: "setVariable" = "setVariable";
+    options: {
+        name: string;
+        value: any;
+    };
+
+    constructor(options: { name: string, value: any }) {
+        this.options = options;
+    }
+
+    trigger(gameContext: Game): void {
+        if (!this.options.name) throw new ConfigurationError("Variable name must be defined for setVariable action");
+        if (this.options.value === undefined) throw new ConfigurationError("Variable value must be defined for setVariable action");
+        if (typeof this.options.value !== "number") throw new ConfigurationError("Variable value must be a number for setVariable action");
+
+        gameContext.getVariableHandler().setVariable(this.options.name, this.options.value);
+    }
+}
+
+class IncrementVariableAction implements Action {
+    type: "incrementVariable" = "incrementVariable";
+    options: {
+        name: string;
+        value: number;
+    };
+
+    constructor(options: { name: string, value: number }) {
+        this.options = options;
+    }
+
+    trigger(gameContext: Game): void {
+        if (!this.options.name) throw new ConfigurationError("Variable name must be defined for incrementVariable action");
+        if (this.options.value === undefined) this.options.value = 1;
+        if (typeof this.options.value !== "number") throw new ConfigurationError("Variable value must be a number for incrementVariable action");
+
+        gameContext.getVariableHandler().incrementVariable(this.options.name, this.options.value);
+    }
+}
+
+class DecrementVariableAction implements Action {
+    type: "decrementVariable" = "decrementVariable";
+    options: {
+        name: string;
+        value: number;
+    };
+
+    constructor(options: { name: string, value: number }) {
+        this.options = options;
+    }
+
+    trigger(gameContext: Game): void {
+        if (!this.options.name) throw new ConfigurationError("Variable name must be defined for decrementVariable action");
+        if (this.options.value === undefined) this.options.value = 1;
+        if (typeof this.options.value !== "number") throw new ConfigurationError("Variable value must be a number for decrementVariable action");
+
+        gameContext.getVariableHandler().decrementVariable(this.options.name, this.options.value);
+    }
+}
 
 
 //
@@ -193,23 +247,30 @@ class PrintActionLogAction implements Action {
  */
 export function createAction(action: Action): Action {
     switch (action.type) {
+        case "goToRoom":
+            return new GoToRoomAction(action.options);
         case "hideObject":
             return new HideObjectAction(action.options);
         case "revealObject":
             return new RevealObjectAction(action.options);
-        case "printActionLog":
-            return new PrintActionLogAction(action.options);
-        case "playSound":
-            return new PlaySoundAction(action.options);
-        case "goToRoom":
-            return new GoToRoomAction(action.options);
         case "giveItem":
             return new GiveItemAction(action.options);
         case "grantNote":
             return new GrantNoteAction(action.options);
         case "showNote":
             return new ShowNoteAction(action.options);
+        case "setVariable":
+            return new SetVariableAction(action.options);
+        case "incrementVariable":
+            return new IncrementVariableAction(action.options);
+        case "decrementVariable":
+            return new DecrementVariableAction(action.options);
+        case "playSound":
+            return new PlaySoundAction(action.options);
+        case "printActionLog":
+            return new PrintActionLogAction(action.options);
+        
         default:
-            throw new Error(`Invalid action type: ${action.type}`);
+            throw new ConfigurationError(`Invalid action type: ${action.type}`);
     }
 }

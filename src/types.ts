@@ -1,5 +1,12 @@
 import { Game } from "./game";
 
+export class ConfigurationError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "ConfigurationError";
+    }
+}
+
 export type GridConfig = {
     width: number;
     height: number;

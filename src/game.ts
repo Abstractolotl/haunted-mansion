@@ -3,10 +3,11 @@ import { Note } from "./elements/objects/note";
 import { Room } from "./elements/objects/room";
 import { Texture } from "./elements/objects/texture";
 import { AssetIndex, GameConfig } from "./types";
-import {Renderer} from "@/lib/renderer";
-import {ConfigHelper} from "@/lib/config-helper";
+import { Renderer } from "@/lib/renderer";
+import { ConfigHelper } from "@/lib/config-helper";
 import { GameObject } from "./elements/objects/game-object";
-
+import { VariableHandler } from "./elements/logic/variable-handler";
+ 
 export class Game {
     private index?: AssetIndex;
     private config?: GameConfig;
@@ -21,6 +22,7 @@ export class Game {
     private items: { [name: string]: Item } = {};
     private notes: { [name: string]: Note } = {};
     private textures: { [name: string]: Texture } = {};
+    private variableHandler: VariableHandler = new VariableHandler();
 
     async start(configPath: string) {
         console.log("🎮 Initializing game")
@@ -197,8 +199,12 @@ export class Game {
         }
     }
 
-    public rerennder() {
+    public rerender() {
         this.renderer?.changeScene(this.room!);
+    }
+
+    public getVariableHandler(): VariableHandler {
+        return this.variableHandler;
     }
 
 }

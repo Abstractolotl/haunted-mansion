@@ -99,7 +99,20 @@ class SelectedItemCondition implements Condition {
 }
 
 // class HasItemCondition
+class HasItemCondition implements Condition {
+    type: "has_item" = "has_item";
+    options: {
+        itemName: string;
+    };
 
+    constructor(options: { itemName: string }) {
+        this.options = options;
+    }
+
+    check(gameContext: Game): boolean {
+        return gameContext.getInventory().filter(item => item.name === this.options.itemName).length > 0;
+    }
+}
 
 //
 //  Comparison
@@ -124,6 +137,8 @@ export function createCondition(condition: Condition): Condition {
     switch (condition.type) {
         case "selected_item":
             return new SelectedItemCondition(condition.options);
+        case "has_item":
+            return new HasItemCondition(condition.options);
         default:
             throw new Error(`Unknown condition type: ${condition.type}`);
     }

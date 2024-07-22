@@ -5,7 +5,7 @@
 	"background": "entrance_background",
 	"objects": [
 		{
-      		"name": "entrance_door",
+      "name": "entrance_door",
 			"posX": 4,
 			"posY": 1,
 			"texture": "entrance_door",
@@ -34,7 +34,7 @@
 			"texture": "window",
 			"interactions": [{
 				"conditions": [{
-					"type": "selected_item",
+					"type": "has_item",
 					"options": {
 						"itemName": "rock"
 					}

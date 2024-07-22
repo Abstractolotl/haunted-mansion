@@ -26,9 +26,12 @@ export class InteractableRow extends Row {
         if (this.interactions[x] && this.interactions[x].length > 0) return;
 
         if (!this.interactions[x]) {
+            this.interactions[x] = [];
+        }
+
+        if(!this.columns[x].classList.contains('interactable')) {
             this.columns[x].classList.add('interactable');
             this.columns[x].onclick = () => this.triggerInteraction(x);
-            this.interactions[x] = [];
         }
 
         if(this.interactions[x].includes(interaction)) {

@@ -12,9 +12,9 @@ export class Game {
     private index?: AssetIndex;
     private config?: GameConfig;
 
+    private gameTick?: NodeJS.Timeout;
     private renderer?: Renderer;
     private room?: Room;
-
     private inventory: Item[] = [];
 
     // assets
@@ -49,7 +49,7 @@ export class Game {
             throw new Error(`❌🎮 Room ${roomName} not found`);
         }
         this.room = room;
-        this.renderer!.changeScene(room);
+        this.renderer!.changeScene(room, this.getInventory());
     }
 
     /**
@@ -199,8 +199,23 @@ export class Game {
         }
     }
 
+    public addToInventory(item: Item) {
+        this.inventory.push(item);
+    }
+
+    public getInventory(): Item[] {
+        return this.inventory;
+    }
+
+    public removeFromInventory(item: Item) {
+        let index = this.inventory.indexOf(item);
+        if (index > -1) {
+            this.inventory.splice(index, 1);
+        }
+    }
+
     public rerender() {
-        this.renderer?.changeScene(this.room!);
+        this.renderer!.changeScene(this.room!, this.getInventory())
     }
 
     public getVariableHandler(): VariableHandler {

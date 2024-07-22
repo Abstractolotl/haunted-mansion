@@ -87,7 +87,7 @@
 			"hidden": true
 		},
 		{
-      		"name": "entrance_beer",
+      "name": "entrance_beer",
 			"posX": 47,
 			"posY": 8,
 			"texture": "object_beer",
@@ -112,7 +112,7 @@
 			]
 		},
 		{
-      		"name": "entrance_rock",
+      "name": "entrance_rock",
 			"posX": 23,
 			"posY": 0,
 			"texture": "object_rock",

@@ -57,6 +57,11 @@ export class Scale {
         }
     }
 
+    public applySize() {
+        this.calculateSize();
+        this.updateSize();
+    }
+
     /**
      * Update the size of the font and the grids
      * @private

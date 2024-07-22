@@ -19,18 +19,68 @@ export class InteractableGrid extends Grid {
 
 export class InteractableRow extends Row {
 
+    private interactionsTimeout: Function[] = [];
+    private interactions: { [x: number]: Function[] } = {};
+
     public addInteraction(x: number, interaction: Function) {
-        this.columns[x].classList.add('interactable');
-        this.columns[x].addEventListener('click', () => {
-            interaction();
-        });
+        if (this.interactions[x] && this.interactions[x].length > 0) return;
+
+        if (!this.interactions[x]) {
+            this.columns[x].classList.add('interactable');
+            this.columns[x].onclick = () => this.triggerInteraction(x);
+            this.interactions[x] = [];
+        }
+
+        if(this.interactions[x].includes(interaction)) {
+            throw new Error('❌🔧 Interaction already exists');
+        }
+
+        this.interactions[x].push(interaction);
     }
 
     public clear() {
         super.clear();
-        for (let column of this.columns) {
-            column.classList.remove('interactable');
-            column.removeEventListener('click', () => {});
+
+        this.interactions = {};
+        this.interactionsTimeout = [];
+
+        for (let x = 0; x < this.columns.length; x++) {
+            let column = this.columns[x];
+            if (column.classList.contains('interactable')) {
+                column.classList.remove('interactable');
+                column.onclick = null;
+            }
         }
+    }
+
+    clearPosition(x: number) {
+        super.clearPosition(x);
+
+        if (!this.interactions[x]) return;
+        this.interactions[x] = [];
+
+        let column = this.columns[x];
+        if (column.classList.contains('interactable')) {
+            column.classList.remove('interactable');
+            column.onclick = null;
+        }
+    }
+
+    public triggerInteraction(x: number) {
+        if (!this.interactions[x]) return;
+
+        for (let interaction of this.interactions[x]) {
+            if (this.interactionsTimeout.includes(interaction)) {
+                return;
+            }
+            this.interactionsTimeout.push(interaction);
+            interaction();
+        }
+
+        // Block interactions for 500ms
+        setTimeout(() => {
+            if (!this.interactions[x]) return;
+            this.interactions[x].forEach((interaction) => this.interactionsTimeout.filter((value) => value !== interaction));
+        }, 1000);
     }
 }

@@ -62,6 +62,12 @@ export class Grid {
         });
     }
 
+    public clearPosition(x: number, y: number) {
+        const row = this.rows[y];
+        if (row) {
+            row.clearPosition(x);
+        }
+    }
 }
 
 export class Row {
@@ -106,5 +112,12 @@ export class Row {
         this.columns.forEach(column => {
             column.innerText = '';
         });
+    }
+
+    public clearPosition(x: number) {
+        const column = this.columns[x];
+        if (column) {
+            column.innerText = '';
+        }
     }
 }

@@ -45,7 +45,7 @@ class HideObjectAction implements Action {
         if (!object) return;
         
         object.hidden = true;
-        gameContext.rerender();
+        gameContext.rerender()
     }
 }
 
@@ -64,7 +64,7 @@ class RevealObjectAction implements Action {
         if (!object) return;
 
         object.hidden = false;
-        gameContext.rerender();
+        gameContext.rerender()
     }
 }
 
@@ -89,12 +89,29 @@ class GiveItemAction implements Action {
 
     trigger(gameContext: Game): void {
         console.log(`Giving item with ID: ${this.options.id}`); // TODO: Implement the logic to give the item
+        gameContext.addToInventory(gameContext.getItem(this.options.id));
+        gameContext.rerender()
     }
 }
 
 // class RemoveItemAction
 
+class RemoveItemAction implements Action {
+    type: "giveItem" = "giveItem";
+    options: {
+        id: string;
+    };
 
+    constructor(options: { id: string }) {
+        this.options = options;
+    }
+
+    trigger(gameContext: Game): void {
+        console.log(`Removing item with ID: ${this.options.id}`); // TODO: Implement the logic to give the item
+        gameContext.removeFromInventory(gameContext.getItem(this.options.id));
+        gameContext.rerender()
+    }
+}
 //
 //  NOTES
 //

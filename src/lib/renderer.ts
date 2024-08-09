@@ -7,7 +7,7 @@ import {Texture} from "@/elements/objects/texture";
 import {InteractableGrid} from "@/elements/interactable-grid";
 import {Item} from "@/elements/objects/item";
 import {Note} from "@/elements/objects/note";
-import {GameObject} from "@/elements/objects/game-object";
+import {Game} from "@/game";
 
 export class Renderer {
 
@@ -57,13 +57,15 @@ export class Renderer {
         return texture;
     }
 
-    public changeScene(room: Room, items: Item[] = [], notes: Note[] = []) {
-        if (this.currentRoom && this.currentRoom?.getDisplayName() === room.getDisplayName()) {
-            this.updateRoom(room, items, notes);
+    public changeScene(game: Game) {
+        if (this.currentRoom && this.currentRoom?.getDisplayName() === game.getCurrentRoom().getDisplayName()) {
+            this.updateRoom(game);
             return;
         } else if(this.currentRoom) {
-            console.log("🎮 Changing scene to: " + room.getDisplayName())
+            console.log("🎮 Changing scene to: " + game.getCurrentRoom().getDisplayName())
         }
+
+        let room = game.getCurrentRoom()
 
         this.roomGrid.clear()
         this.objectGrid.clear()
@@ -92,13 +94,14 @@ export class Renderer {
             });
         });
 
-        this.renderInventory(items);
+        this.renderInventory(game);
         this.currentRoom = room
     }
 
-    private updateRoom(room: Room, items: Item[] = [], notes: Note[] = []) {
+    private updateRoom(game: Game) {
         if (!this.currentRoom) return;
 
+        let room = game.getCurrentRoom()
         room.getObjects().filter((object) => object.hidden).forEach((object) => {
             let objectTexture = this.getTexture(object.texture);
             objectTexture.getContent().split("\n").reverse().forEach((line, y) => {
@@ -126,32 +129,36 @@ export class Renderer {
             });
         })
 
-        this.renderInventory(items);
+        this.renderInventory(game);
         this.currentRoom = room
     }
 
-    private renderInventory(items: Item[]) {
-        if (items.length === 0) return;
+    private renderInventory(game: Game) {
+        this.background.drawInventoryBorder(game.getSelectedInventorySlot());
+        if (game.getInventory().length === 0) return;
 
         let maxX = this.config.getSceneBorder()[0] - 2;
         let start = {x: 2, y: 1}
 
         for(let x = start.x; x < maxX; x++) {
             for (let y = start.y; y < this.config.getInventorySize().rows * (this.config.getInventorySize().slotSize[1] + 1); y++) {
-                this.roomGrid.clearPosition(x, y)
+                this.objectGrid.clearPosition(x, y)
             }
         }
 
         let columns = Math.floor((maxX - start.x) / (this.config.getInventorySize().slotSize[0] + 1))
-        for (let i = 0; i < items.length; i++) {
-            let item = items[i];
+        for (let i = 0; i < game.getInventory().length; i++) {
+            let item = game.getInventory()[i];
             let itemTexture = this.getTexture(item.texture);
             itemTexture.getContent().split("\n").reverse().forEach((line, y) => {
                 line.split("").forEach((char, x) => {
                     let posX = (start.x + 1) + (i % columns) * (this.config.getInventorySize().slotSize[0] + 1) + x;
                     let posY = (start.y + 1 )+ Math.floor(i / columns) * (this.config.getInventorySize().slotSize[1] + 1) + y;
 
-                    this.roomGrid.draw(char, posX, posY)
+                    this.objectGrid.draw(char, posX, posY)
+                    this.objectGrid.addInteraction(posX, posY, () => {
+                        game.setSelectedInventorySlot(i);
+                    });
                 });
             });
         }

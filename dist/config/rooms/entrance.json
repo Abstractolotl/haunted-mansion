@@ -34,7 +34,7 @@
 			"texture": "window",
 			"interactions": [{
 				"conditions": [{
-					"type": "has_item",
+					"type": "selected_item",
 					"options": {
 						"itemName": "rock"
 					}

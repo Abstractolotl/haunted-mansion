@@ -68,6 +68,24 @@ class RevealObjectAction implements Action {
     }
 }
 
+class ClickObjectAction implements Action {
+    type: "clickObject" = "clickObject";
+    options: {
+        id: string;
+    };
+
+    constructor(options: { id: string }) {
+        this.options = options;
+    }
+
+    trigger(gameContext: Game): void {
+        const object = gameContext.getObjectByName(this.options.id);
+        if (!object) return;
+
+        object.executeInteractions();
+    }
+}
+
 // class MoveObjectAction
 // class ShiftObjectAction
 
@@ -271,6 +289,8 @@ export function createAction(action: Action): Action {
             return new HideObjectAction(action.options);
         case "revealObject":
             return new RevealObjectAction(action.options);
+        case "clickObject":
+            return new ClickObjectAction(action.options);
         case "giveItem":
             return new GiveItemAction(action.options);
         case "grantNote":

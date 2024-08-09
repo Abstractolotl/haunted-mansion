@@ -92,9 +92,7 @@ class SelectedItemCondition implements Condition {
     }
 
     check(gameContext: Game): boolean {
-        // TODO: Implement the logic to check if the item is selected
-        console.log(`Checking if item is selected: ${this.options.itemName}`);
-        return true; // Placeholder
+        return gameContext.getInventory()[gameContext.getSelectedInventorySlot()].name === this.options.itemName;
     }
 }
 
@@ -135,6 +133,14 @@ class HasItemCondition implements Condition {
  */
 export function createCondition(condition: Condition): Condition {
     switch (condition.type) {
+        case "or":
+            return new OrCondition(condition.options);
+        case "and":
+            return new AndCondition(condition.options);
+        case "not":
+            return new NotCondition(condition.options);
+        case "xor":
+            return new XorCondition(condition.options);
         case "selected_item":
             return new SelectedItemCondition(condition.options);
         case "has_item":

@@ -12,10 +12,10 @@ export class Game {
     private index?: AssetIndex;
     private config?: GameConfig;
 
-    private gameTick?: NodeJS.Timeout;
     private renderer?: Renderer;
     private room?: Room;
     private inventory: Item[] = [];
+    private selectedInventorySlot: number = 0;
 
     // assets
     private rooms: { [name: string]: Room } = {};
@@ -40,7 +40,7 @@ export class Game {
         }
         this.room = startingRoom;
         console.log("🎮 Starting game in room: " + startingRoom.getDisplayName());
-        this.renderer.changeScene(startingRoom);
+        this.renderer.changeScene(this);
     }
 
     public goToRoom(roomName: string) {
@@ -49,7 +49,7 @@ export class Game {
             throw new Error(`❌🎮 Room ${roomName} not found`);
         }
         this.room = room;
-        this.renderer!.changeScene(room, this.getInventory());
+        this.renderer!.changeScene(this);
     }
 
     /**
@@ -207,6 +207,15 @@ export class Game {
         return this.inventory;
     }
 
+    public getSelectedInventorySlot(): number {
+        return this.selectedInventorySlot;
+    }
+
+    public setSelectedInventorySlot(slot: number) {
+        this.selectedInventorySlot = slot;
+        this.rerender();
+    }
+
     public removeFromInventory(item: Item) {
         let index = this.inventory.indexOf(item);
         if (index > -1) {
@@ -214,8 +223,15 @@ export class Game {
         }
     }
 
+    public getCurrentRoom(): Room {
+        if (!this.room) {
+            throw new Error("❌🎮 No room set");
+        }
+        return this.room;
+    }
+
     public rerender() {
-        this.renderer!.changeScene(this.room!, this.getInventory())
+        this.renderer!.changeScene(this);
     }
 
     public getVariableHandler(): VariableHandler {

@@ -92,9 +92,7 @@ class SelectedItemCondition implements Condition {
     }
 
     check(gameContext: Game): boolean {
-        // TODO: Implement the logic to check if the item is selected
-        console.log(`Checking if item is selected: ${this.options.itemName}`);
-        return true; // Placeholder
+        return gameContext.getInventory()[gameContext.getSelectedInventorySlot()].name === this.options.itemName;
     }
 }
 

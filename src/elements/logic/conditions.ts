@@ -133,6 +133,14 @@ class HasItemCondition implements Condition {
  */
 export function createCondition(condition: Condition): Condition {
     switch (condition.type) {
+        case "or":
+            return new OrCondition(condition.options);
+        case "and":
+            return new AndCondition(condition.options);
+        case "not":
+            return new NotCondition(condition.options);
+        case "xor":
+            return new XorCondition(condition.options);
         case "selected_item":
             return new SelectedItemCondition(condition.options);
         case "has_item":

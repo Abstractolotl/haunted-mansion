@@ -1,83 +1,194 @@
 {
-    "rooms": [
-        {
-            "name": "entrance",
-            "path": "rooms/entrance.json"
-        },
-        {
-            "name": "outside",
-            "path": "rooms/outside.json"
-        }
-    ],
-    "items": [
-        {
-            "name": "beer",
-            "path": "items/beer.json"
-        },
-        {
-            "name": "rock",
-            "path": "items/rock.json"
-        }
-    ],
-    "notes": [
-        {
-            "name": "first_note",
-            "path": "notes/first_note.json"
-
-        }
-    ],
-    "textures": [
-        {
-            "name": "entrance_background",
-            "path": "entrance_background.txt"
-        },
-        {
-            "name": "outside_background",
-            "path": "outside_background.txt"
-        },
-        {
-            "name": "entrance_door",
-            "path": "objects/entrance_door.txt"
-        },
-        {
-            "name": "outside_door",
-            "path": "objects/outside_door.txt"
-        },
-        {
-            "name": "window",
-            "path": "objects/window.txt"
-        },
-        {
-            "name": "window_broken",
-            "path": "objects/window_broken.txt"
-        },
-        {
-            "name": "small_window",
-            "path": "objects/small_window.txt"
-        },
-        {
-            "name": "small_window_broken",
-            "path": "objects/small_window_broken.txt"
-        },
-        {
-            "name": "item_rock",
-            "path": "items/rock.txt"
-        },
-        {
-            "name": "item_beer",
-            "path": "items/beer.txt"
-        },
-        {
-            "name": "object_rock",
-            "path": "objects/rock.txt"
-        },
-        {
-            "name": "object_beer",
-            "path": "objects/beer.txt"
-        },
-        {
-            "name": "note",
-            "path": "objects/note.txt"
-        }
-    ]
+  "rooms": [
+    {
+      "name": "room1",
+      "path": "rooms/room1.json"
+    },
+    {
+      "name": "outside",
+      "path": "rooms/outside.json"
+    }
+  ],
+  "items": [
+    {
+      "name": "beer",
+      "path": "items/beer.json"
+    },
+    {
+      "name": "rock",
+      "path": "items/rock.json"
+    },
+    {
+      "name": "key_door",
+      "path": "items/key_door.json"
+    },
+    {
+      "name": "key_dresser",
+      "path": "items/key_dresser.json"
+    },
+    {
+      "name": "flower",
+      "path": "items/flower.json"
+    },
+    {
+      "name": "ladder",
+      "path": "items/ladder.json"
+    }
+  ],
+  "notes": [
+    {
+      "name": "first_note",
+      "path": "notes/first_note.json"
+    }
+  ],
+  "textures": [
+    {
+      "name": "entrance_background",
+      "path": "entrance_background.txt"
+    },
+    {
+      "name": "outside_background",
+      "path": "outside_background.txt"
+    },
+    {
+      "name": "entrance_door",
+      "path": "objects/entrance_door.txt"
+    },
+    {
+      "name": "outside_door",
+      "path": "objects/outside_door.txt"
+    },
+    {
+      "name": "window",
+      "path": "objects/window.txt"
+    },
+    {
+      "name": "window_broken",
+      "path": "objects/window_broken.txt"
+    },
+    {
+      "name": "small_window",
+      "path": "objects/small_window.txt"
+    },
+    {
+      "name": "small_window_broken",
+      "path": "objects/small_window_broken.txt"
+    },
+    {
+      "name": "item_rock",
+      "path": "items/rock.txt"
+    },
+    {
+      "name": "item_beer",
+      "path": "items/beer.txt"
+    },
+    {
+      "name": "item_key_door",
+      "path": "items/key.txt"
+    },
+    {
+      "name": "item_key_dresser",
+      "path": "items/key2.txt"
+    },
+    {
+      "name": "item_ladder",
+      "path": "items/ladder.txt"
+    },
+    {
+      "name": "object_rock",
+      "path": "objects/rock.txt"
+    },
+    {
+      "name": "object_beer",
+      "path": "objects/beer.txt"
+    },
+    {
+      "name": "object_key",
+      "path": "objects/key.txt"
+    },
+    {
+      "name": "object_ladder",
+      "path": "objects/ladder.txt"
+    },
+    {
+      "name": "note",
+      "path": "objects/note.txt"
+    },
+    {
+      "name": "room_base",
+      "path": "objects/room.txt"
+    },
+    {
+      "name": "cupboard_base",
+      "path": "objects/cupboard_base.txt"
+    },
+    {
+      "name": "cupboard_door_right_closed",
+      "path": "objects/cupboard_door_right_closed.txt"
+    },
+    {
+      "name": "cupboard_door_right_open",
+      "path": "objects/cupboard_door_right_open.txt"
+    },
+    {
+      "name": "cupboard_door_left_closed",
+      "path":  "objects/cupboard_door_left_closed.txt"
+    },
+    {
+      "name": "cupboard_door_left_open",
+      "path": "objects/cupboard_door_left_open.txt"
+    },
+    {
+      "name": "dresser_base",
+      "path": "objects/dresser_base.txt"
+    },
+    {
+      "name": "dresser_door_right_closed",
+      "path": "objects/dresser_door_right_closed.txt"
+    },
+    {
+      "name": "dresser_door_right_open",
+      "path": "objects/dresser_door_right_open.txt"
+    },
+    {
+      "name": "dresser_door_left_closed",
+      "path": "objects/dresser_door_left_closed.txt"
+    },
+    {
+      "name": "dresser_door_left_open",
+      "path": "objects/dresser_door_left_open.txt"
+    },
+    {
+      "name": "door_left",
+      "path": "objects/door_left.txt"
+    },
+    {
+      "name": "door_right",
+      "path": "objects/door_right.txt"
+    },
+    {
+      "name": "window_left",
+      "path": "objects/window_left.txt"
+    },
+    {
+      "name": "window_right",
+      "path": "objects/window_right.txt"
+    },
+    {
+      "name": "object_flower",
+      "path": "objects/flower.txt"
+    },
+    {
+      "name": "item_flower",
+      "path": "items/flower.txt"
+    },
+    {
+      "name": "flower_pot",
+      "path": "objects/flower_pot.txt"
+    },
+    {
+      "name": "flower_pot_shards",
+      "path": "objects/flower_pot_shards.txt"
+    }
+  ]
 }

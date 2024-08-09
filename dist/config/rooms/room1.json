@@ -1,0 +1,498 @@
+{
+  "name": "room1",
+  "displayName": "Start Raum",
+  "persistence": true,
+  "background": "room_base",
+  "objects": [
+    {
+      "name": "door",
+      "posX": 72,
+      "posY": 5,
+      "texture": "door_right",
+      "interactions": [
+        {
+          "conditions": [
+            {
+              "type": "has_item",
+              "options": {
+                "itemName": "key_door"
+              }
+            }
+          ],
+          "actions": [
+            {
+              "type": "goToRoom",
+              "options": {
+                "roomName": "outside"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dresser_base",
+      "posX": 26,
+      "posY": 8,
+      "texture": "dresser_base"
+    },
+    {
+      "name": "cupboard_base",
+      "posX": 50,
+      "posY": 8,
+      "texture": "cupboard_base"
+    },
+    {
+      "name": "cupboard_door_right_closed",
+      "posX": 60,
+      "posY": 9,
+      "texture": "cupboard_door_right_closed",
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "cupboard_door_right_closed"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "cupboard_door_right_open"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast die rechte Schranktür geöffnet."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cupboard_door_right_open",
+      "posX": 60,
+      "posY": 7,
+      "texture": "cupboard_door_right_open",
+      "hidden": true,
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "cupboard_door_right_open"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "cupboard_door_right_closed"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast die rechte Schranktür geschlossen."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cupboard_door_left_closed",
+      "posX": 50,
+      "posY": 9,
+      "texture": "cupboard_door_left_closed",
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "cupboard_door_left_closed"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "cupboard_door_left_open"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "rock"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast die linke Schranktür geöffnet."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cupboard_door_left_open",
+      "posX": 48,
+      "posY": 7,
+      "texture": "cupboard_door_left_open",
+      "hidden": true,
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "cupboard_door_left_open"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "cupboard_door_left_closed"
+              }
+            },
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "rock"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast die linke Schranktür geschlossen."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "rock",
+      "posX": 54,
+      "posY": 11,
+      "texture": "object_rock",
+      "hidden": true,
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "rock"
+              }
+            },
+            {
+              "type": "giveItem",
+              "options": {
+                "id": "rock"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dresser_door_right_closed",
+      "posX": 37,
+      "posY": 8,
+      "texture": "dresser_door_right_closed",
+      "interactions": [
+        {
+          "conditions": [
+            {
+              "type": "has_item",
+              "options": {
+                "itemName": "key_dresser"
+              }
+            }
+          ],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "dresser_door_right_closed"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "dresser_door_right_open"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "ladder"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast die rechte Schranktür geöffnet."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dresser_door_right_open",
+      "posX": 45,
+      "posY": 5,
+      "texture": "dresser_door_right_open",
+      "hidden": true,
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "dresser_door_right_open"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "dresser_door_right_closed"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast die rechte Schranktür geschlossen."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dresser_door_left_closed",
+      "posX": 26,
+      "posY": 8,
+      "texture": "dresser_door_left_closed",
+      "interactions": [
+      ]
+    },
+    {
+      "name": "dresser_door_left_open",
+      "posX": 24,
+      "posY": 7,
+      "texture": "dresser_door_left_open",
+      "hidden": true,
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "dresser_door_left_open"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "dresser_door_left_closed"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast die linke Schranktür geschlossen."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "flower_pot",
+      "posX": 53,
+      "posY": 14,
+      "texture": "flower_pot",
+      "interactions": [
+        {
+          "conditions": [
+            {
+              "type": "has_item",
+              "options": {
+                "itemName": "rock"
+              }
+            }
+          ],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "flower_pot"
+              }
+            },
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "flower"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "key_dresser"
+              }
+            },
+            {
+              "type": "revealObject",
+              "options": {
+                "id": "flower_pot_shards"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast den Blumentopf zerbrochen."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "flower_pot_shards",
+      "posX": 53,
+      "posY": 6,
+      "texture": "flower_pot_shards",
+      "hidden": true
+    },
+    {
+      "name": "key_door",
+      "posX": 30,
+      "posY": 22,
+      "texture": "object_key",
+      "interactions": [
+        {
+          "conditions": [
+            {
+              "type": "has_item",
+              "options": {
+                "itemName": "ladder"
+              }
+            }
+          ],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "key_door"
+              }
+            },
+            {
+              "type": "giveItem",
+              "options": {
+                "id": "key_door"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "key_dresser",
+      "posX": 60,
+      "posY": 4,
+      "texture": "object_key",
+      "hidden": true,
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "key_dresser"
+              }
+            },
+            {
+              "type": "giveItem",
+              "options": {
+                "id": "key_dresser"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "window",
+      "posX": 18,
+      "posY": 12,
+      "texture": "window_left"
+    },
+    {
+      "name": "flower",
+      "posX": 53,
+      "posY": 18,
+      "texture": "object_flower",
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "flower"
+              }
+            },
+            {
+              "type": "giveItem",
+              "options": {
+                "id": "flower"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ladder",
+      "posX": 40,
+      "posY": 12,
+      "texture": "object_ladder",
+      "hidden": true,
+      "interactions": [
+        {
+          "conditions": [],
+          "actions": [
+            {
+              "type": "hideObject",
+              "options": {
+                "id": "ladder"
+              }
+            },
+            {
+              "type": "giveItem",
+              "options": {
+                "id": "ladder"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

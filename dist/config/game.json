@@ -1,5 +1,5 @@
 {
-  "entryRoomId": "entrance",
+  "entryRoomId": "room1",
   "startingItems": [],
   "interface": {
     "scene": [124, 10],

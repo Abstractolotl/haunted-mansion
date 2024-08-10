@@ -60,7 +60,7 @@ export class Game {
      */
     private async loadAssets(configPath: string) {
         await this.loadGameConfig(configPath);
-        await this.loadAssetIndex(this.config!.indexPath);
+        await this.loadAssetIndex(this.config!.indexPath || "index.json");
 
         // Load all assets
         this.loadTextures();
@@ -89,13 +89,13 @@ export class Game {
 
     /**
      * Load the asset index from the server
-     * @param indexPath The path to the asset index
+     * @param indexPath The path to the asset index inside the config folder
      * @returns A promise that resolves when the asset index has been loaded
      * @throws An error if the asset index could not be loaded
      */
     private async loadAssetIndex(indexPath: string) {
         console.log("📚 Loading asset index");
-        this.index = await fetch(indexPath).then(response => response.json());
+        this.index = await fetch("config/" + indexPath).then(response => response.json());
         if (!this.index) {
             throw new Error("❌📚 Asset index could not be loaded, exiting...");
         }

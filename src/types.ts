@@ -18,7 +18,7 @@ export type GameConfig = {
     entryRoomId: string;
     startingItems?: string[];
     interface: InterfaceConfig;
-    indexPath: string;
+    indexPath?: string;
 }
 
 export type InterfaceConfig = {

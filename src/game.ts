@@ -34,9 +34,9 @@ export class Game {
         this.renderer = new Renderer(configHelper, this.textures);
 
         // Find the starting room
-        const startingRoom = this.rooms[this.config!.entryRoomId];
+        const startingRoom = this.rooms[this.config!.settings.entryRoomId];
         if (!startingRoom) {
-            throw new Error(`❌🎮 Starting room ${this.config!.entryRoomId} not found`);
+            throw new Error(`❌🎮 Starting room ${this.config!.settings.entryRoomId} not found`);
         }
         this.room = startingRoom;
         console.log("🎮 Starting game in room: " + startingRoom.getDisplayName());
@@ -60,7 +60,7 @@ export class Game {
      */
     private async loadAssets(configPath: string) {
         await this.loadGameConfig(configPath);
-        await this.loadAssetIndex(this.config!.indexPath || "index.json");
+        await this.loadAssetIndex(this.config!.settings!.indexPath || "index.json");
 
         // Load all assets
         this.loadTextures();

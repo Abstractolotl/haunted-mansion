@@ -14,22 +14,22 @@ export class ConfigHelper {
     }
 
     getSceneBorder() {
-        return this.gameConfig?.interface.scene!;
+        return this.gameConfig?.settings.interface.scene!;
     }
 
     getInventorySize() {
-        return this.gameConfig?.interface.inventory!;
+        return this.gameConfig?.settings.interface.inventory!;
     }
 
     getActionLogSize() {
-        return this.gameConfig?.interface.actionLog!;
+        return this.gameConfig?.settings.interface.actionLog!;
     }
 
     getPadding() {
-        return this.gameConfig?.interface.padding || 0;
+        return this.gameConfig?.settings.interface.padding || 0;
     }
 
     getStartingItems() {
-        return this.gameConfig?.startingItems || [];
+        return this.gameConfig?.settings.startingItems || [];
     }
 }

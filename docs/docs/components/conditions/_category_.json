@@ -1,0 +1,9 @@
+{
+    "label": "Condition",
+    "position": 8,
+    "link": {
+      "type": "generated-index",
+      "description": "Conditions are a part of an Interaction. They will be evaluated and can result in a boolean state of true or false."
+    }
+  }
+  

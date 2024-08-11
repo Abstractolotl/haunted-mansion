@@ -1,15 +1,28 @@
 {
-  "entryRoomId": "entrance",
-  "startingItems": [],
-  "interface": {
-    "scene": [124, 10],
-    "actionLog": 32,
-    "padding": 5,
-    "inventory": {
-      "rows": 2,
-      "columns": 5,
-      "slotSize": [5, 3]
+  "author": [
+    {
+      "name": "Jona Elsinger"
     }
-  },
-  "indexPath": "index.json"
+  ],
+
+  "title": "Demo Game",
+  "description": "This is a demo game.",
+  "version": "0.1.0",
+  "tags": ["demo", "protoype"],
+
+  "settings": {
+    "entryRoomId": "entrance",
+    "startingItems": [],
+    "interface": {
+      "scene": [124, 10],
+      "actionLog": 32,
+      "padding": 5,
+      "inventory": {
+        "rows": 2,
+        "columns": 5,
+        "slotSize": [5, 3]
+      }
+    },
+    "indexPath": "index.json"
+  }
 }

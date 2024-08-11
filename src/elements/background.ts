@@ -1,5 +1,5 @@
 import {Grid} from "./grid";
-import {GameConfig, GridConfig} from "@/types";
+import {GridConfig} from "@/types";
 import {ConfigHelper} from "@/lib/config-helper";
 
 export default class Background {

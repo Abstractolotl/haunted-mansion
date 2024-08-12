@@ -1,4 +1,5 @@
 import {Grid} from "@/elements/grid";
+import ActionLog from "@/elements/action-log";
 
 const GRID_WIDTH =  1920; // 96 cells with 20px
 const GRID_HEIGHT = 1080; // 54 cells with 20px cell size
@@ -12,6 +13,7 @@ export class Scale {
     private rows: number = GRID_HEIGHT / GRID_SIZE;
 
     private grids: Grid[] = [];
+    private actionLog?: ActionLog;
 
     constructor(){
         // Calculate the size of the grid on load
@@ -25,6 +27,10 @@ export class Scale {
             this.calculateSize();
             this.updateSize();
         };
+    }
+
+    public setActionLog(actionLog: ActionLog){
+        this.actionLog = actionLog;
     }
 
     /**
@@ -70,6 +76,9 @@ export class Scale {
         document.body.style.fontSize = `${this.size}px`;
         for (let grid of this.grids){
             grid.resize(this.size);
+        }
+        if (this.actionLog){
+            this.actionLog.resize(this.getGridConfig());
         }
     }
 

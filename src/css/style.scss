@@ -66,3 +66,9 @@ $text-dark: #f5f5f5;
 .background {
   z-index: 0;
 }
+
+.action-log {
+  position: absolute;
+  z-index: 3;
+  background-color: red;
+}

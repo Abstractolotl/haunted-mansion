@@ -8,6 +8,7 @@ import {InteractableGrid} from "@/elements/interactable-grid";
 import {Item} from "@/elements/objects/item";
 import {Note} from "@/elements/objects/note";
 import {Game} from "@/game";
+import ActionLog from "@/elements/action-log";
 
 export class Renderer {
 
@@ -19,6 +20,7 @@ export class Renderer {
 
     private readonly roomGrid: Grid;
     private readonly objectGrid: InteractableGrid;
+    private readonly actionLog: ActionLog;
 
     private readonly config: ConfigHelper;
     private readonly textures: { [name: string]: Texture } = {};
@@ -47,6 +49,9 @@ export class Renderer {
         this.scale.addGrid(this.background.getGrid());
         this.scale.addGrid(this.roomGrid);
         this.scale.addGrid(this.objectGrid);
+
+        this.actionLog = new ActionLog(this.scale.getGridConfig(), config, gameParent);
+        this.scale.setActionLog(this.actionLog);
 
         this.scale.applySize();
     }

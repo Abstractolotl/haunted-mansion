@@ -8,7 +8,6 @@ import {InteractableGrid} from "@/elements/interactable-grid";
 import {Item} from "@/elements/objects/item";
 import {Note} from "@/elements/objects/note";
 import {Game} from "@/game";
-import ActionLog from "@/elements/action-log";
 
 export class Renderer {
 
@@ -20,7 +19,6 @@ export class Renderer {
 
     private readonly roomGrid: Grid;
     private readonly objectGrid: InteractableGrid;
-    private readonly actionLog: ActionLog;
 
     private readonly config: ConfigHelper;
     private readonly textures: { [name: string]: Texture } = {};
@@ -50,9 +48,6 @@ export class Renderer {
         this.scale.addGrid(this.roomGrid);
         this.scale.addGrid(this.objectGrid);
 
-        this.actionLog = new ActionLog(this.scale.getGridConfig(), config, gameParent);
-        this.scale.setActionLog(this.actionLog);
-
         this.scale.applySize();
     }
 
@@ -72,6 +67,7 @@ export class Renderer {
 
         let room = game.getCurrentRoom()
 
+        this.background.drawActionLog(game.getActionLog())
         this.roomGrid.clear()
         this.objectGrid.clear()
 
@@ -105,6 +101,8 @@ export class Renderer {
 
     private updateRoom(game: Game) {
         if (!this.currentRoom) return;
+
+        this.background.drawActionLog(game.getActionLog())
 
         let room = game.getCurrentRoom()
         room.getObjects().filter((object) => object.hidden).forEach((object) => {

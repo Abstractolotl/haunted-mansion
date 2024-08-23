@@ -34,6 +34,12 @@ export default class Background {
         let maxY = this.gridConfig.height - 2;
         let minY = 1;
 
+        for (let y = minY; y < maxY; y++) {
+            for (let x = minX; x < maxX; x++) {
+                this.draw(' ', x, y);
+            }
+        }
+
         let startY = minY;
         for (let i = logs.length - 1; i >= 0; i--) {
             let lines = TextHelper.splitTextToLines(logs[i], maxX - minX);

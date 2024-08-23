@@ -161,7 +161,7 @@ class ShowNoteAction implements Action {
 
     trigger(gameContext: Game): void {
         console.log(`Showing note: ${this.options.noteName}`); // TODO: Implement the logic to show the note
-        alert(gameContext.getNote(this.options.noteName).getText());
+        alert(gameContext.getNote(this.options.noteName).getText()); // TODO: Replace with a real note displaynpm
     }
 }
 

@@ -189,6 +189,14 @@
     {
       "name": "flower_pot_shards",
       "path": "objects/flower_pot_shards.txt"
+    },
+    {
+      "name": "deer",
+      "path": "objects/deer.txt"
+    },
+    {
+      "name": "heart",
+      "path": "objects/heart.txt"
     }
   ]
 }

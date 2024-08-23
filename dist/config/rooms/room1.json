@@ -13,7 +13,7 @@
         {
           "conditions": [
             {
-              "type": "has_item",
+              "type": "selected_item",
               "options": {
                 "itemName": "key_door"
               }
@@ -24,6 +24,12 @@
               "type": "goToRoom",
               "options": {
                 "roomName": "outside"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast den Raum verlassen."
               }
             }
           ]
@@ -66,7 +72,7 @@
             {
               "type": "printActionLog",
               "options": {
-                "text": "Du hast die rechte Schranktür geöffnet."
+                "text": "Du hast die rechte Komodentür geöffnet."
               }
             }
           ]
@@ -98,7 +104,7 @@
             {
               "type": "printActionLog",
               "options": {
-                "text": "Du hast die rechte Schranktür geschlossen."
+                "text": "Du hast die rechte Komodentür geschlossen."
               }
             }
           ]
@@ -135,7 +141,7 @@
             {
               "type": "printActionLog",
               "options": {
-                "text": "Du hast die linke Schranktür geöffnet."
+                "text": "Du hast die linke Komodentür geöffnet."
               }
             }
           ]
@@ -173,7 +179,7 @@
             {
               "type": "printActionLog",
               "options": {
-                "text": "Du hast die linke Schranktür geschlossen."
+                "text": "Du hast die linke Komodentür geschlossen."
               }
             }
           ]
@@ -201,6 +207,12 @@
               "options": {
                 "id": "rock"
               }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast einen Stein gefunden."
+              }
             }
           ]
         }
@@ -215,7 +227,7 @@
         {
           "conditions": [
             {
-              "type": "has_item",
+              "type": "selected_item",
               "options": {
                 "itemName": "key_dresser"
               }
@@ -243,7 +255,7 @@
             {
               "type": "printActionLog",
               "options": {
-                "text": "Du hast die rechte Schranktür geöffnet."
+                "text": "Du hast die rechte Schranktür mit dem Schlüssel geöffnet."
               }
             }
           ]
@@ -331,7 +343,7 @@
         {
           "conditions": [
             {
-              "type": "has_item",
+              "type": "selected_item",
               "options": {
                 "itemName": "rock"
               }
@@ -365,7 +377,7 @@
             {
               "type": "printActionLog",
               "options": {
-                "text": "Du hast den Blumentopf zerbrochen."
+                "text": "Du hast den Blumentopf mit dem Stein zerbrochen."
               }
             }
           ]
@@ -388,7 +400,7 @@
         {
           "conditions": [
             {
-              "type": "has_item",
+              "type": "selected_item",
               "options": {
                 "itemName": "ladder"
               }
@@ -405,6 +417,12 @@
               "type": "giveItem",
               "options": {
                 "id": "key_door"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast den Türschlüssel mithilfe der Leiter vom Schrank genommen."
               }
             }
           ]
@@ -431,6 +449,12 @@
               "type": "giveItem",
               "options": {
                 "id": "key_dresser"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast einen Schlüssel zwischen den Scherben gefunden!"
               }
             }
           ]
@@ -463,6 +487,12 @@
               "options": {
                 "id": "flower"
               }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast eine sehr schöne Blume gefunden. Ob man damit etwas machen kann?."
+              }
             }
           ]
         }
@@ -488,6 +518,12 @@
               "type": "giveItem",
               "options": {
                 "id": "ladder"
+              }
+            },
+            {
+              "type": "printActionLog",
+              "options": {
+                "text": "Du hast eine Leiter im Schrank gefunden. WOW!"
               }
             }
           ]

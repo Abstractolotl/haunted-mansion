@@ -1,6 +1,7 @@
 import {Grid} from "./grid";
 import {GridConfig} from "@/types";
 import {ConfigHelper} from "@/lib/config-helper";
+import TextHelper from "@/lib/text-helper";
 
 export default class Background {
 
@@ -24,6 +25,30 @@ export default class Background {
 
         this.drawInventoryBorder()
         this.drawGameBorder(config.getSceneBorder())
+    }
+
+    public drawActionLog(logs: string[]) {
+        let maxX = this.gridConfig.width - 2;
+        let minX = this.inventoryStartX + 2;
+
+        let maxY = this.gridConfig.height - 2;
+        let minY = 1;
+
+        let startY = minY;
+        for (let i = logs.length - 1; i >= 0; i--) {
+            let lines = TextHelper.splitTextToLines(logs[i], maxX - minX);
+            if (startY + (lines.length - 1) > maxY) {
+                break;
+            }
+            let y = startY + (lines.length - 1);
+            for(let line of lines) {
+                line.split('').forEach((char, x) => {
+                    this.draw(char, minX + x, y);
+                });
+                y--;
+            }
+            startY += lines.length + 1;
+        }
     }
 
     private drawGameBorder(sceneBorder: number[]) {

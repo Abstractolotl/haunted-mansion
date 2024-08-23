@@ -14,6 +14,8 @@ export class Game {
 
     private renderer?: Renderer;
     private room?: Room;
+
+    private actionLog: string[] = [];
     private inventory: Item[] = [];
     private selectedInventorySlot: number = 0;
 
@@ -197,6 +199,15 @@ export class Game {
                 return object;
             }
         }
+    }
+
+    public logAction(action: string) {
+        this.actionLog.push(action);
+        this.rerender();
+    }
+
+    public getActionLog(): string[] {
+        return this.actionLog;
     }
 
     public addToInventory(item: Item) {

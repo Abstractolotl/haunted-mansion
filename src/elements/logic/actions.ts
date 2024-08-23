@@ -268,7 +268,10 @@ class PrintActionLogAction implements Action {
     }
 
     trigger(gameContext: Game): void {
-        console.log(`Log: ${this.options.text}`); // TODO: Implement the logic to print the action log
+        let date = new Date();
+        let time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        gameContext.logAction(`${time} > ${this.options.text}`);
+        console.log(`Printing action log: ${this.options.text}`);
     }
 }
 

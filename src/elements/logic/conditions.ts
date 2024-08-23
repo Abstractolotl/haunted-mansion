@@ -110,6 +110,12 @@ class SelectedItemCondition implements Condition {
     }
 
     check(gameContext: Game): boolean {
+        if (gameContext.getSelectedInventorySlot() === null) {
+            return false;
+        }
+        if (gameContext.getInventory()[gameContext.getSelectedInventorySlot()] === undefined) {
+            return false;
+        }
         return gameContext.getInventory()[gameContext.getSelectedInventorySlot()].name === this.options.itemName;
     }
 }

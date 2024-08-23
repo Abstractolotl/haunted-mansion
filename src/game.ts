@@ -14,6 +14,8 @@ export class Game {
 
     private renderer?: Renderer;
     private room?: Room;
+
+    private actionLog: string[] = [];
     private inventory: Item[] = [];
     private selectedInventorySlot: number = 0;
 
@@ -34,9 +36,9 @@ export class Game {
         this.renderer = new Renderer(configHelper, this.textures);
 
         // Find the starting room
-        const startingRoom = this.rooms[this.config!.entryRoomId];
+        const startingRoom = this.rooms[this.config!.settings.entryRoomId];
         if (!startingRoom) {
-            throw new Error(`❌🎮 Starting room ${this.config!.entryRoomId} not found`);
+            throw new Error(`❌🎮 Starting room ${this.config!.settings.entryRoomId} not found`);
         }
         this.room = startingRoom;
         console.log("🎮 Starting game in room: " + startingRoom.getDisplayName());
@@ -60,7 +62,7 @@ export class Game {
      */
     private async loadAssets(configPath: string) {
         await this.loadGameConfig(configPath);
-        await this.loadAssetIndex(this.config!.indexPath);
+        await this.loadAssetIndex(this.config!.settings!.indexPath || "index.json");
 
         // Load all assets
         this.loadTextures();
@@ -89,13 +91,13 @@ export class Game {
 
     /**
      * Load the asset index from the server
-     * @param indexPath The path to the asset index
+     * @param indexPath The path to the asset index inside the config folder
      * @returns A promise that resolves when the asset index has been loaded
      * @throws An error if the asset index could not be loaded
      */
     private async loadAssetIndex(indexPath: string) {
         console.log("📚 Loading asset index");
-        this.index = await fetch(indexPath).then(response => response.json());
+        this.index = await fetch("config/" + indexPath).then(response => response.json());
         if (!this.index) {
             throw new Error("❌📚 Asset index could not be loaded, exiting...");
         }
@@ -197,6 +199,15 @@ export class Game {
                 return object;
             }
         }
+    }
+
+    public logAction(action: string) {
+        this.actionLog.push(action);
+        this.rerender();
+    }
+
+    public getActionLog(): string[] {
+        return this.actionLog;
     }
 
     public addToInventory(item: Item) {

@@ -1,0 +1,73 @@
+---
+sidebar_position: 1
+---
+
+# Inventory
+
+## SelectedItemCondition
+
+This Condition returns true if the player has the specified item selected in his inventory.
+
+### Example
+
+```json
+{
+  "type": "selectedItem",
+  "options": {
+    "itemName": "<ITEM_NAME>"
+  }
+}
+```
+
+## HasItemCondition
+
+This Condition returns true if the player has the specified item in his inventory.
+
+:::tip[Note]
+
+export const Highlight = ({children, color}) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: '20px',
+      color: '#fff',
+      padding: '10px',
+      cursor: 'pointer',
+    }}
+    >
+    {children}
+  </span>
+);
+
+To check for multiple items, use <Highlight color="#307F34"><a href="#hasitemscondition" style={{textDecoration: 'none'}} >HasItemsCondition</a></Highlight>.
+
+:::
+
+### Example
+
+```json
+{
+  "type": "hasItem",
+  "options": {
+    "itemName": "<ITEM_NAME>"
+  }
+}
+```
+
+## HasItemsCondition
+
+This Condition returns true if the player has all the specified items in his inventory.
+
+### Example
+
+```json
+{
+  "type": "hasItems",
+  "options": {
+    "itemNames": [
+      "<ITEM_NAME>",
+      "<ITEM_NAME>"
+    ]
+  }
+}
+```

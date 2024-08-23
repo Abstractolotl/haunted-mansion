@@ -67,6 +67,7 @@ export class Renderer {
 
         let room = game.getCurrentRoom()
 
+        this.background.drawActionLog(game.getActionLog())
         this.roomGrid.clear()
         this.objectGrid.clear()
 
@@ -100,6 +101,8 @@ export class Renderer {
 
     private updateRoom(game: Game) {
         if (!this.currentRoom) return;
+
+        this.background.drawActionLog(game.getActionLog())
 
         let room = game.getCurrentRoom()
         room.getObjects().filter((object) => object.hidden).forEach((object) => {

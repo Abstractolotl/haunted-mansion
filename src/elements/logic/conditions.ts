@@ -22,6 +22,24 @@ class OrCondition implements Condition {
     }
 }
 
+class NorCondition implements Condition {
+    type: "nor" = "nor";
+    conditions: Condition[];
+
+    constructor(options: { conditions: Condition[] }) {
+        this.conditions = options.conditions;
+    }
+
+    check(gameContext: Game): boolean {
+        for (let condition of this.conditions) {
+            if (condition.check(gameContext)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
 class AndCondition implements Condition {
     type: "and" = "and";
     conditions: Condition[];
@@ -82,7 +100,7 @@ class XorCondition implements Condition {
 //
 
 class SelectedItemCondition implements Condition {
-    type: "selected_item" = "selected_item";
+    type: "selectedItem" = "selectedItem";
     options: {
         itemName: string;
     };
@@ -92,13 +110,19 @@ class SelectedItemCondition implements Condition {
     }
 
     check(gameContext: Game): boolean {
+        if (gameContext.getSelectedInventorySlot() === null) {
+            return false;
+        }
+        if (gameContext.getInventory()[gameContext.getSelectedInventorySlot()] === undefined) {
+            return false;
+        }
         return gameContext.getInventory()[gameContext.getSelectedInventorySlot()].name === this.options.itemName;
     }
 }
 
 // class HasItemCondition
 class HasItemCondition implements Condition {
-    type: "has_item" = "has_item";
+    type: "hasItem" = "hasItem";
     options: {
         itemName: string;
     };
@@ -109,6 +133,22 @@ class HasItemCondition implements Condition {
 
     check(gameContext: Game): boolean {
         return gameContext.getInventory().filter(item => item.name === this.options.itemName).length > 0;
+    }
+}
+
+// class HasItemsCondition
+class HasItemsCondition implements Condition {
+    type: "hasItems" = "hasItems";
+    options: {
+        itemNames: string[];
+    };
+
+    constructor(options: { itemNames: string[] }) {
+        this.options = options;
+    }
+
+    check(gameContext: Game): boolean {
+        return this.options.itemNames.every(itemName => gameContext.getInventory().filter(item => item.name === itemName));
     }
 }
 
@@ -135,6 +175,8 @@ export function createCondition(condition: Condition): Condition {
     switch (condition.type) {
         case "or":
             return new OrCondition(condition.options);
+        case "nor":
+            return new NorCondition(condition.options);
         case "and":
             return new AndCondition(condition.options);
         case "not":
@@ -142,9 +184,13 @@ export function createCondition(condition: Condition): Condition {
         case "xor":
             return new XorCondition(condition.options);
         case "selected_item":
+        case "selectedItem":
             return new SelectedItemCondition(condition.options);
         case "has_item":
+        case "hasItem":
             return new HasItemCondition(condition.options);
+        case "hasItems":
+            return new HasItemsCondition(condition.options);
         default:
             throw new Error(`Unknown condition type: ${condition.type}`);
     }

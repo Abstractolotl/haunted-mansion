@@ -15,10 +15,25 @@ export type GridConfig = {
 
 // game.json
 export type GameConfig = {
-    entryRoomId: string;
-    startingItems?: string[];
-    interface: InterfaceConfig;
-    indexPath: string;
+    author?: [
+        {
+            name?: string;
+            email?: string;
+            website?: string;
+        }
+    ]
+
+    title?: string;
+    description?: string;
+    version?: string;
+    tags?: string[];
+
+    settings: {
+        entryRoomId: string;
+        startingItems?: string[];
+        interface: InterfaceConfig;
+        indexPath?: string;
+    }
 }
 
 export type InterfaceConfig = {

@@ -1,14 +1,16 @@
 {
-  "entryRoomId": "room1",
-  "startingItems": [],
-  "interface": {
-    "scene": [124, 10],
-    "actionLog": 32,
-    "padding": 5,
-    "inventory": {
-      "rows": 2,
-      "columns": 5,
-      "slotSize": [5, 3]
+  "settings" : {
+    "entryRoomId": "room1",
+    "startingItems": [],
+    "interface": {
+      "scene": [124, 10],
+      "actionLog": 32,
+      "padding": 5,
+      "inventory": {
+        "rows": 2,
+        "columns": 5,
+        "slotSize": [5, 3]
+      }
     }
   },
   "indexPath": "index.json"
